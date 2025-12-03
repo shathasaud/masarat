@@ -1,0 +1,1680 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نظام المسارات التعليمية</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            width: 100%;
+            min-height: 100%;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .main-container {
+            width: 100%;
+            padding: 2rem 1rem;
+        }
+
+        .header {
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 2rem;
+        }
+
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0 0 0.5rem 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            color: #1565c0;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            margin: 0;
+            opacity: 0.95;
+            color: #0d47a1;
+        }
+
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .section-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #1565c0;
+            margin: 0 0 1.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #42a5f5;
+        }
+
+        .goals-infographic {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 2rem 0;
+            padding: 2rem 0;
+        }
+
+        .goal-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 8px 20px rgba(66, 165, 245, 0.3);
+        }
+
+        .goal-1 {
+            background: linear-gradient(135deg, #42a5f5 0%, #1e88e5 100%);
+            animation: floatAnimation 3s ease-in-out infinite;
+        }
+
+        .goal-2 {
+            background: linear-gradient(135deg, #29b6f6 0%, #0277bd 100%);
+            animation: floatAnimation 3s ease-in-out infinite 1s;
+        }
+
+        .goal-3 {
+            background: linear-gradient(135deg, #4fc3f7 0%, #0288d1 100%);
+            animation: floatAnimation 3s ease-in-out infinite 2s;
+        }
+
+        @keyframes floatAnimation {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .goal-circle:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 15px 35px rgba(66, 165, 245, 0.5);
+        }
+
+        .goal-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .goal-text {
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        .fields-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .field-badge {
+            background: #42a5f5;
+            color: white;
+            padding: 1rem;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .field-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.5s ease;
+        }
+
+        .field-badge:hover::before {
+            left: 100%;
+        }
+
+        .field-badge:hover {
+            background: #1e88e5;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 15px rgba(66, 165, 245, 0.4);
+        }
+
+        .terms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .term-card {
+            background: linear-gradient(135deg, #ffffff 0%, #e3f2fd 100%);
+            padding: 1.75rem;
+            border-radius: 18px;
+            border: 2px solid #bbdefb;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .term-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #42a5f5 0%, #1e88e5 100%);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .term-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .term-card:hover {
+            border-color: #42a5f5;
+            box-shadow: 0 10px 25px rgba(66, 165, 245, 0.25);
+            transform: translateY(-5px);
+        }
+
+        .term-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .term-card:hover .term-icon {
+            animation: rotateIcon 0.6s ease-in-out;
+        }
+
+        @keyframes rotateIcon {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(-10deg);
+            }
+            75% {
+                transform: rotate(10deg);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .term-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #1565c0;
+            margin: 0 0 1rem 0;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .term-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 2px;
+            background: #42a5f5;
+            transition: width 0.3s ease;
+        }
+
+        .term-card:hover .term-title::after {
+            width: 100%;
+        }
+
+        .term-description {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.7;
+            margin: 0;
+            text-align: justify;
+        }
+
+        .goals-hexagon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+            padding: 1rem;
+        }
+
+        .hexagon-card {
+            background: linear-gradient(135deg, #ffffff 0%, #e3f2fd 100%);
+            padding: 2rem 1.5rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            border: 3px solid #bbdefb;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .hexagon-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(66, 165, 245, 0.1) 0%, rgba(30, 136, 229, 0.1) 100%);
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .hexagon-card:hover::before {
+            opacity: 1;
+        }
+
+        .hex-1 { animation: floatAnimation 3s ease-in-out infinite; }
+        .hex-2 { animation: floatAnimation 3s ease-in-out infinite 0.5s; }
+        .hex-3 { animation: floatAnimation 3s ease-in-out infinite 1s; }
+        .hex-4 { animation: floatAnimation 3s ease-in-out infinite 1.5s; }
+        .hex-5 { animation: floatAnimation 3s ease-in-out infinite 2s; }
+        .hex-6 { animation: floatAnimation 3s ease-in-out infinite 2.5s; }
+
+        .hexagon-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(66, 165, 245, 0.3);
+            border-color: #42a5f5;
+        }
+
+        .hex-icon {
+            font-size: 3.5rem;
+            filter: drop-shadow(0 4px 8px rgba(66, 165, 245, 0.3));
+            position: relative;
+            z-index: 1;
+        }
+
+        .hex-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1565c0;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        .vision-footer {
+            background: linear-gradient(135deg, #ffd54f 0%, #ffeb3b 100%);
+            color: #f57c00;
+            padding: 1.5rem;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 2rem;
+            box-shadow: 0 4px 15px rgba(255, 213, 79, 0.4);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 1.8rem;
+            }
+
+            .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .section-card {
+                padding: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .goals-infographic {
+                flex-direction: column;
+            }
+
+            .goal-circle {
+                width: 180px;
+                height: 180px;
+            }
+
+            .fields-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .terms-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .term-icon {
+                font-size: 2rem;
+            }
+
+            .goals-hexagon-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hex-icon {
+                font-size: 3rem;
+            }
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="main-container">
+   <header class="header">
+    <h1 class="main-title" id="pageTitle">🎓 نظام المسارات في وزارة التعليم</h1>
+    <p class="subtitle" id="subtitle">المملكة العربية السعودية</p>
+   </header>
+   <div class="content-wrapper"><!-- تعريف نظام المسارات -->
+    <section class="section-card">
+     <h2 class="section-title"><span>📚</span> <span id="introTitle">تعريف نظام المسارات</span></h2>
+     <p style="font-size: 1.1rem; color: #555; line-height: 1.8; margin: 1rem 0; text-align: center;">نظام تعليمي حديث في مرحلة الثانوية العامة يهدف إلى:</p>
+     <div class="goals-infographic">
+      <div class="goal-circle goal-1">
+       <div class="goal-icon">
+        🎓
+       </div>
+       <div class="goal-text">
+        تهيئة الطالب للحياة الجامعية وسوق العمل
+       </div>
+      </div>
+      <div class="goal-circle goal-2">
+       <div class="goal-icon">
+        🎯
+       </div>
+       <div class="goal-text">
+        اختيار المسار المناسب للقدرات والميول
+       </div>
+      </div>
+      <div class="goal-circle goal-3">
+       <div class="goal-icon">
+        🚀
+       </div>
+       <div class="goal-text">
+        بناء مهارات المستقبل مع رؤية 2030
+       </div>
+      </div>
+     </div>
+     <div class="vision-footer">
+      🇸🇦 متوافق مع رؤية المملكة 2030 🚀
+     </div>
+    </section><!-- مصطلحات يجب أن تعرفها الطالبة -->
+    <section class="section-card">
+     <h2 class="section-title"><span>📖</span> <span>مصطلحات يجب أن تعرفها الطالبة</span></h2>
+     <div class="terms-grid">
+      <div class="term-card">
+       <div class="term-icon">
+        📋
+       </div>
+       <h3 class="term-title">الخطة الدراسية</h3>
+       <p class="term-description">هي الجدول الذي يحدد المواد والمقررات التي ستدرسها الطالبة خلال الثلاث سنوات في المرحلة الثانوية، مع عدد الساعات والوحدات لكل مادة</p>
+      </div>
+      <div class="term-card">
+       <div class="term-icon">
+        1️⃣
+       </div>
+       <h3 class="term-title">السنة الأولى</h3>
+       <p class="term-description">السنة المشتركة لجميع الطالبات، تدرس فيها الطالبة مجالات متنوعة (علمي، إنساني، تقني، مهاري) لاكتشاف ميولها وقدراتها قبل اختيار المسار</p>
+      </div>
+      <div class="term-card">
+       <div class="term-icon">
+        🎯
+       </div>
+       <h3 class="term-title">التسكين</h3>
+       <p class="term-description">عملية توزيع الطالبات على أحد المسارات التخصصية الخمسة بناءً على أدائها الأكاديمي، ميولها، واختباراتها المعيارية في نهاية السنة الأولى</p>
+      </div>
+      <div class="term-card">
+       <div class="term-icon">
+        🧭
+       </div>
+       <h3 class="term-title">المسار التخصصي</h3>
+       <p class="term-description">المجال الدراسي الذي تختاره الطالبة لإكمال السنة الثانية والثالثة (العام، الحاسب والهندسة، الصحة والحياة، إدارة الأعمال، أو الشرعي)</p>
+      </div>
+      <div class="term-card">
+       <div class="term-icon">
+        📚
+       </div>
+       <h3 class="term-title">المواد الاختيارية</h3>
+       <p class="term-description">مواد إضافية تختارها الطالبة حسب اهتماماتها وأهدافها المستقبلية، تساعدها في تعميق معرفتها في مجالات معينة أو اكتساب مهارات جديدة</p>
+      </div>
+      <div class="term-card">
+       <div class="term-icon">
+        🤝
+       </div>
+       <h3 class="term-title">العمل التطوعي</h3>
+       <p class="term-description">نشاط إلزامي يجب على الطالبة إتمام عدد معين من ساعاته خلال المرحلة الثانوية، يهدف لتعزيز المسؤولية الاجتماعية والمشاركة المجتمعية</p>
+      </div>
+      <div class="term-card">
+       <div class="term-icon">
+        🎓
+       </div>
+       <h3 class="term-title">مشروع التخرج</h3>
+       <p class="term-description">مشروع تطبيقي تقدمه الطالبة في الفصل الأخير يعكس ما تعلمته خلال مسارها، يشمل بحث أو تطبيق عملي يحل مشكلة حقيقية في مجال تخصصها</p>
+      </div>
+     </div>
+    </section><!-- أهداف المرحلة الثانوية العامة -->
+    <section class="section-card">
+     <h2 class="section-title"><span>🎯</span> <span>أهداف المرحلة الثانوية العامة</span></h2>
+     <p style="font-size: 1.15rem; color: #555; line-height: 1.8; margin: 0 0 2rem 0; text-align: center; font-weight: 600;">تهدف الثانوية العامة إلى تخريج جيل:</p>
+     <div class="goals-hexagon-grid">
+      <div class="hexagon-card hex-1">
+       <div class="hex-icon">
+        🇸🇦
+       </div>
+       <p class="hex-text">معتز بهويته الوطنية</p>
+      </div>
+      <div class="hexagon-card hex-2">
+       <div class="hex-icon">
+        🏗️
+       </div>
+       <p class="hex-text">منتج مسهم في نهضة وطنه</p>
+      </div>
+      <div class="hexagon-card hex-3">
+       <div class="hex-icon">
+        🤝
+       </div>
+       <p class="hex-text">مشارك متفاعل مع محيطه</p>
+      </div>
+      <div class="hexagon-card hex-4">
+       <div class="hex-icon">
+        💪
+       </div>
+       <p class="hex-text">يمتلك شخصية مبادرة ومثابرة</p>
+      </div>
+      <div class="hexagon-card hex-5">
+       <div class="hex-icon">
+        🎨
+       </div>
+       <p class="hex-text">مثقف مبدع ومبتكر</p>
+      </div>
+      <div class="hexagon-card hex-6">
+       <div class="hex-icon">
+        📚
+       </div>
+       <p class="hex-text">مكتسب للمعارف والمهارات الحديثة والقيم</p>
+      </div>
+     </div>
+     <div class="vision-footer">
+      ✨ بناء جيل متوازن مستعد لمستقبل مشرق ومساهم في رؤية 2030
+     </div>
+    </section><!-- رحلة الطالب في الثانوية العامة -->
+    <section class="section-card">
+     <h2 class="section-title"><span>📍</span> <span id="journeyTitle">رحلة الطالب في الثانوية العامة</span></h2><!-- البطاقة الأولى: نظرة عامة على المسارات -->
+     <div style="background: white; padding: 2rem; border-radius: 20px; margin-bottom: 2rem; border: 3px solid #42a5f5; box-shadow: 0 8px 20px rgba(66, 165, 245, 0.2);">
+      <div style="text-align: center; margin-bottom: 2rem;">
+       <div style="background: linear-gradient(135deg, #42a5f5 0%, #1e88e5 100%); color: white; width: 60px; height: 60px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.8rem; margin-bottom: 1rem; box-shadow: 0 4px 15px rgba(66, 165, 245, 0.4);">
+        🎯
+       </div>
+       <h3 style="color: #1565c0; font-size: 1.4rem; font-weight: bold; margin: 0;">نظرة عامة على المسارات التخصصية</h3>
+      </div>
+      <p style="font-size: 1.1rem; color: #555; line-height: 1.9; margin: 0 0 2rem 0; text-align: center;">في المرحلة الثانوية يلتحق الطالب بالسنة الأولى ثم تليها سنتان يوزع فيها الطلاب وفق ضوابط ومعايير على خمسة مسارات تخصصية رئيسة وهي:</p>
+      <div class="fields-grid">
+       <div class="field-badge">
+        📚 العام
+       </div>
+       <div class="field-badge">
+        💻 علوم الحاسب والهندسة
+       </div>
+       <div class="field-badge">
+        🏥 الصحة والحياة
+       </div>
+       <div class="field-badge">
+        💼 إدارة الأعمال
+       </div>
+       <div class="field-badge">
+        📿 الشرعي
+       </div>
+      </div>
+      <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-radius: 20px; text-align: center; border: 3px solid #66bb6a;">
+       <p style="margin: 0; color: #2e7d32; font-weight: 700; font-size: 1.15rem;">⭐ يتم التوزيع وفق الأداء الأكاديمي، الميول، والاختبارات المعيارية</p>
+      </div>
+     </div><!-- البطاقة الثانية: السنة الأولى -->
+     <div style="background: linear-gradient(135deg, #ffffff 0%, #e3f2fd 100%); padding: 2rem; border-radius: 20px; margin-bottom: 2rem; border: 3px solid #29b6f6; box-shadow: 0 8px 20px rgba(41, 182, 246, 0.2); position: relative;">
+      <div style="text-align: center; margin-bottom: 2rem;">
+       <div style="background: linear-gradient(135deg, #29b6f6 0%, #0277bd 100%); color: white; width: 70px; height: 70px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; font-size: 2rem; margin-bottom: 1rem; box-shadow: 0 4px 15px rgba(41, 182, 246, 0.4);">
+        1
+       </div>
+       <h3 style="color: #01579b; font-size: 1.5rem; font-weight: bold; margin: 0 0 0.5rem 0;">السنة الأولى – مشتركة للجميع</h3>
+       <p style="color: #0277bd; font-size: 1rem; margin: 0;">يدرس الطالب مجالات متنوعة:</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1.25rem; margin-bottom: 1.5rem;">
+       <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px) scale(1.05)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 12px rgba(0, 0, 0, 0.1)'">
+        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+         🔬
+        </div>
+        <p style="margin: 0; color: #1565c0; font-weight: 600; font-size: 0.95rem;">علمي</p>
+       </div>
+       <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px) scale(1.05)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 12px rgba(0, 0, 0, 0.1)'">
+        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+         📖
+        </div>
+        <p style="margin: 0; color: #1565c0; font-weight: 600; font-size: 0.95rem;">إنساني</p>
+       </div>
+       <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px) scale(1.05)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 12px rgba(0, 0, 0, 0.1)'">
+        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+         📿
+        </div>
+        <p style="margin: 0; color: #1565c0; font-weight: 600; font-size: 0.95rem;">شرعي</p>
+       </div>
+       <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px) scale(1.05)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 12px rgba(0, 0, 0, 0.1)'">
+        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+         💻
+        </div>
+        <p style="margin: 0; color: #1565c0; font-weight: 600; font-size: 0.95rem;">تقني</p>
+       </div>
+       <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px) scale(1.05)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 12px rgba(0, 0, 0, 0.1)'">
+        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+         🌍
+        </div>
+        <p style="margin: 0; color: #1565c0; font-weight: 600; font-size: 0.95rem;">لغات</p>
+       </div>
+       <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px) scale(1.05)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 12px rgba(0, 0, 0, 0.1)'">
+        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+         🛠️
+        </div>
+        <p style="margin: 0; color: #1565c0; font-weight: 600; font-size: 0.95rem;">مهاري</p>
+       </div>
+      </div>
+      <div style="text-align: center; font-size: 3rem; color: #42a5f5; margin: 1rem 0; animation: bounce 2s ease-in-out infinite;">
+       ⬇️
+      </div>
+     </div><!-- البطاقة الثالثة: التسكين -->
+     <div style="background: linear-gradient(135deg, #fff9e6 0%, #fff3cc 100%); padding: 2rem; border-radius: 20px; margin-bottom: 2rem; border: 3px solid #ffc107; box-shadow: 0 8px 20px rgba(255, 193, 7, 0.2);">
+      <div style="text-align: center; margin-bottom: 2rem;">
+       <div style="background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%); color: white; width: 70px; height: 70px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; font-size: 2rem; margin-bottom: 1rem; box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);">
+        2
+       </div>
+       <h3 style="color: #e65100; font-size: 1.5rem; font-weight: bold; margin: 0;">التسكين - اختيار المسار</h3>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+       <div style="background: white; padding: 1.5rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(255, 193, 7, 0.2); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(255, 193, 7, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(255, 193, 7, 0.2)'">
+        <div style="font-size: 3rem; margin-bottom: 0.75rem;">
+         💡
+        </div>
+        <p style="margin: 0; color: #f57c00; font-weight: 600; font-size: 1.1rem;">الميول</p>
+       </div>
+       <div style="background: white; padding: 1.5rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(255, 193, 7, 0.2); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(255, 193, 7, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(255, 193, 7, 0.2)'">
+        <div style="font-size: 3rem; margin-bottom: 0.75rem;">
+         📊
+        </div>
+        <p style="margin: 0; color: #f57c00; font-weight: 600; font-size: 1.1rem;">الأداء الأكاديمي</p>
+       </div>
+       <div style="background: white; padding: 1.5rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(255, 193, 7, 0.2); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(255, 193, 7, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(255, 193, 7, 0.2)'">
+        <div style="font-size: 3rem; margin-bottom: 0.75rem;">
+         📝
+        </div>
+        <p style="margin: 0; color: #f57c00; font-weight: 600; font-size: 1.1rem;">اختبارات معيارية</p>
+       </div>
+       <div style="background: white; padding: 1.5rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(255, 193, 7, 0.2); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(255, 193, 7, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(255, 193, 7, 0.2)'">
+        <div style="font-size: 3rem; margin-bottom: 0.75rem;">
+         ⚡
+        </div>
+        <p style="margin: 0; color: #f57c00; font-weight: 600; font-size: 1.1rem;">الاستعدادات</p>
+       </div>
+      </div>
+      <div style="text-align: center; font-size: 3rem; color: #ff9800; margin: 1rem 0; animation: bounce 2s ease-in-out infinite;">
+       ⬇️
+      </div>
+     </div><!-- البطاقة الرابعة: السنة الثانية والثالثة -->
+     <div style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); padding: 2rem; border-radius: 20px; margin-bottom: 2rem; border: 3px solid #ba68c8; box-shadow: 0 8px 20px rgba(186, 104, 200, 0.2);">
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+       <div style="background: linear-gradient(135deg, #ba68c8 0%, #9c27b0 100%); color: white; width: 70px; height: 70px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; font-size: 2rem; margin-bottom: 1rem; box-shadow: 0 4px 15px rgba(186, 104, 200, 0.4);">
+        3
+       </div>
+       <h3 style="color: #6a1b9a; font-size: 1.5rem; font-weight: bold; margin: 0 0 1rem 0;">السنة الثانية والثالثة</h3>
+       <p style="color: #7b1fa2; font-size: 1.1rem; margin: 0; font-weight: 600;">يكمل الطالب دراسته في أحد المسارات الخمسة التخصصية</p>
+      </div>
+      <div style="text-align: center; font-size: 3rem; color: #ba68c8; margin: 1rem 0; animation: bounce 2s ease-in-out infinite;">
+       ⬇️
+      </div>
+     </div><!-- البطاقة الخامسة: بعد التخرج -->
+     <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 2rem; border-radius: 20px; border: 3px solid #66bb6a; box-shadow: 0 8px 20px rgba(102, 187, 106, 0.2);">
+      <div style="text-align: center; margin-bottom: 2rem;">
+       <div style="background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%); color: white; width: 70px; height: 70px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; font-size: 2rem; margin-bottom: 1rem; box-shadow: 0 4px 15px rgba(102, 187, 106, 0.4);">
+        4
+       </div>
+       <h3 style="color: #2e7d32; font-size: 1.5rem; font-weight: bold; margin: 0;">بعد التخرج - المستقبل</h3>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem;">
+       <div style="background: white; padding: 2rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(102, 187, 106, 0.2); transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-8px) scale(1.05)'; this.style.boxShadow='0 12px 25px rgba(102, 187, 106, 0.4)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 12px rgba(102, 187, 106, 0.2)'">
+        <div style="font-size: 4rem; margin-bottom: 1rem;">
+         🎓
+        </div>
+        <p style="margin: 0; color: #2e7d32; font-weight: 700; font-size: 1.3rem;">التعليم العالي</p>
+       </div>
+       <div style="background: white; padding: 2rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(102, 187, 106, 0.2); transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-8px) scale(1.05)'; this.style.boxShadow='0 12px 25px rgba(102, 187, 106, 0.4)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 12px rgba(102, 187, 106, 0.2)'">
+        <div style="font-size: 4rem; margin-bottom: 1rem;">
+         💼
+        </div>
+        <p style="margin: 0; color: #2e7d32; font-weight: 700; font-size: 1.3rem;">سوق العمل</p>
+       </div>
+      </div>
+     </div>
+    </section><!-- السنة الأولى / الصف الأول الثانوي -->
+    <section class="section-card">
+     <h2 class="section-title"><span>1️⃣</span> <span>السنة الأولى / الصف الأول الثانوي</span></h2><!-- البطاقة الأولى: تعريف السنة الأولى -->
+     <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 2rem; border-radius: 20px; margin-bottom: 2rem; border: 3px solid #66bb6a; box-shadow: 0 8px 20px rgba(102, 187, 106, 0.25);">
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+       <div style="font-size: 3.5rem; margin-bottom: 1rem; filter: drop-shadow(0 4px 8px rgba(102, 187, 106, 0.3));">
+        📚
+       </div>
+       <h3 style="color: #2e7d32; font-size: 1.6rem; font-weight: bold; margin: 0 0 0.5rem 0;">السنة الأولى (الصف الأول الثانوي)</h3>
+      </div>
+      <p style="font-size: 1.1rem; color: #333; line-height: 2; margin: 0; text-align: justify; padding: 0 1rem;">سنة <strong style="color: #2e7d32;">تمهيدية</strong> يُعد فيها الطالب <strong style="color: #2e7d32;">الإعداد العام</strong> ويُهيأ للالتحاق بالمسارات التخصصية عبر عمليات <strong style="color: #2e7d32;">التسكين</strong> التي تحدد مسار الطالب الذي يتناسب مع <strong style="color: #2e7d32;">ميوله واتجاهاته وقدراته</strong>، بحيث يكمل الطالب السنتين التاليتين في المسار المحدد.</p>
+     </div><!-- البطاقة الثانية: مجالات التعلم -->
+     <div style="background: white; padding: 2rem; border-radius: 20px; margin-bottom: 2rem; border: 3px solid #42a5f5; box-shadow: 0 8px 20px rgba(66, 165, 245, 0.25);">
+      <div style="text-align: center; margin-bottom: 2rem;">
+       <div style="font-size: 3.5rem; margin-bottom: 1rem; filter: drop-shadow(0 4px 8px rgba(66, 165, 245, 0.3));">
+        🎯
+       </div>
+       <h3 style="color: #1565c0; font-size: 1.6rem; font-weight: bold; margin: 0;">مجالات التعلم في السنة الأولى</h3>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;"><!-- المجال 1: العلوم الشرعية والإنسانية -->
+       <div style="background: linear-gradient(135deg, #fff9e6 0%, #fff3cc 100%); padding: 1.75rem; border-radius: 18px; border: 3px solid #ffc107; transition: all 0.4s ease; cursor: pointer; position: relative; overflow: hidden;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 12px 30px rgba(255, 193, 7, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+        <div style="position: absolute; top: 15px; right: 15px; background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);">
+         1
+        </div>
+        <div style="text-align: center; margin-bottom: 1.25rem;">
+         <div style="font-size: 3.5rem; margin-bottom: 0.75rem;">
+          📿
+         </div>
+         <h4 style="color: #f57c00; font-size: 1.25rem; font-weight: bold; margin: 0; line-height: 1.5;">العلوم الشرعية<br>
+          والإنسانية</h4>
+        </div>
+        <div style="background: white; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+         <p style="margin: 0; color: #555; font-size: 0.95rem; line-height: 1.8; text-align: center;">القرآن • الحديث • الفقه<br>
+           التاريخ • الجغرافيا • اللغة العربية</p>
+        </div>
+       </div><!-- المجال 2: العلوم الطبيعية والتطبيقية -->
+       <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 1.75rem; border-radius: 18px; border: 3px solid #42a5f5; transition: all 0.4s ease; cursor: pointer; position: relative; overflow: hidden;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 12px 30px rgba(66, 165, 245, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+        <div style="position: absolute; top: 15px; right: 15px; background: linear-gradient(135deg, #42a5f5 0%, #1e88e5 100%); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.4);">
+         2
+        </div>
+        <div style="text-align: center; margin-bottom: 1.25rem;">
+         <div style="font-size: 3.5rem; margin-bottom: 0.75rem;">
+          🔬
+         </div>
+         <h4 style="color: #1565c0; font-size: 1.25rem; font-weight: bold; margin: 0; line-height: 1.5;">العلوم الطبيعية<br>
+          والتطبيقية</h4>
+        </div>
+        <div style="background: white; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+         <p style="margin: 0; color: #555; font-size: 0.95rem; line-height: 1.8; text-align: center;">الرياضيات • الفيزياء<br>
+           الكيمياء • الأحياء • التقنية</p>
+        </div>
+       </div><!-- المجال 3: العلوم الإدارية -->
+       <div style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); padding: 1.75rem; border-radius: 18px; border: 3px solid #ba68c8; transition: all 0.4s ease; cursor: pointer; position: relative; overflow: hidden;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 12px 30px rgba(186, 104, 200, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+        <div style="position: absolute; top: 15px; right: 15px; background: linear-gradient(135deg, #ba68c8 0%, #9c27b0 100%); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; box-shadow: 0 4px 12px rgba(186, 104, 200, 0.4);">
+         3
+        </div>
+        <div style="text-align: center; margin-bottom: 1.25rem;">
+         <div style="font-size: 3.5rem; margin-bottom: 0.75rem;">
+          💼
+         </div>
+         <h4 style="color: #7b1fa2; font-size: 1.25rem; font-weight: bold; margin: 0; line-height: 1.5;">العلوم الإدارية</h4>
+        </div>
+        <div style="background: white; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+         <p style="margin: 0; color: #555; font-size: 0.95rem; line-height: 1.8; text-align: center;">إدارة الأعمال • المحاسبة<br>
+           التسويق • الاقتصاد</p>
+        </div>
+       </div><!-- المجال 4: المهارات -->
+       <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 1.75rem; border-radius: 18px; border: 3px solid #66bb6a; transition: all 0.4s ease; cursor: pointer; position: relative; overflow: hidden;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 12px 30px rgba(102, 187, 106, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+        <div style="position: absolute; top: 15px; right: 15px; background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; box-shadow: 0 4px 12px rgba(102, 187, 106, 0.4);">
+         4
+        </div>
+        <div style="text-align: center; margin-bottom: 1.25rem;">
+         <div style="font-size: 3.5rem; margin-bottom: 0.75rem;">
+          🛠️
+         </div>
+         <h4 style="color: #2e7d32; font-size: 1.25rem; font-weight: bold; margin: 0; line-height: 1.5;">المهارات</h4>
+        </div>
+        <div style="background: white; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+         <p style="margin: 0; color: #555; font-size: 0.95rem; line-height: 1.8; text-align: center;">التفكير الناقد • الإبداع<br>
+           التواصل • العمل الجماعي<br>
+           حل المشكلات</p>
+        </div>
+       </div>
+      </div>
+     <div style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); padding: 2rem; border-radius: 20px; border: 4px dashed #ff9800; box-shadow: 0 8px 20px rgba(255, 152, 0, 0.2); text-align: center;">
+      <div style="font-size: 3rem; margin-bottom: 1rem; animation: pulse 2s ease-in-out infinite;">
+       🎯
+      </div>
+      <p style="margin: 0; color: #e65100; font-size: 1.25rem; font-weight: 700; line-height: 1.9;">هذه المجالات تساعد الطالب على اكتشاف<br><strong style="font-size: 1.35rem;">ميوله واتجاهاته</strong><br>
+        قبل اختيار المسار التخصصي</p>
+     </div>
+    </section><!-- المسارات التخصصية في المرحلة الثانوية -->
+    <section class="section-card">
+     <h2 class="section-title"><span>🧭</span> <span>المسارات التخصصية في المرحلة الثانوية</span></h2><!-- بطاقة الإحصائيات -->
+     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem;">
+      <div style="background: linear-gradient(135deg, #42a5f5 0%, #1e88e5 100%); padding: 2rem; border-radius: 20px; text-align: center; box-shadow: 0 8px 20px rgba(66, 165, 245, 0.3); transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px) scale(1.05)'" onmouseout="this.style.transform='translateY(0) scale(1)'">
+       <div style="font-size: 3.5rem; margin-bottom: 1rem; color: white; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));">
+        5
+       </div>
+       <p style="margin: 0; color: white; font-size: 1.2rem; font-weight: 700;">مسارات تخصصية</p>
+      </div>
+      <div style="background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%); padding: 2rem; border-radius: 20px; text-align: center; box-shadow: 0 8px 20px rgba(102, 187, 106, 0.3); transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px) scale(1.05)'" onmouseout="this.style.transform='translateY(0) scale(1)'">
+       <div style="font-size: 3.5rem; margin-bottom: 1rem; color: white; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));">
+        3
+       </div>
+       <p style="margin: 0; color: white; font-size: 1.2rem; font-weight: 700;">سنوات دراسية</p>
+      </div>
+      <div style="background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%); padding: 2rem; border-radius: 20px; text-align: center; box-shadow: 0 8px 20px rgba(255, 193, 7, 0.3); transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px) scale(1.05)'" onmouseout="this.style.transform='translateY(0) scale(1)'">
+       <div style="font-size: 3.5rem; margin-bottom: 1rem; color: white; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));">
+        ∞
+       </div>
+       <p style="margin: 0; color: white; font-size: 1.2rem; font-weight: 700;">فرص مستقبلية</p>
+      </div>
+     </div><!-- بطاقة المسار العام -->
+     <div style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); padding: 2.5rem; border-radius: 25px; margin-bottom: 2rem; border: 4px solid #ba68c8; box-shadow: 0 10px 30px rgba(186, 104, 200, 0.3);">
+      <div style="text-align: center; margin-bottom: 2.5rem;">
+       <div style="font-size: 4.5rem; margin-bottom: 1rem; filter: drop-shadow(0 4px 8px rgba(186, 104, 200, 0.4));">
+        1️⃣
+       </div>
+       <h3 style="color: #6a1b9a; font-size: 2rem; font-weight: bold; margin: 0;">المسار العام</h3>
+      </div><!-- وصف المسار -->
+      <div style="background: white; padding: 2rem; border-radius: 20px; margin-bottom: 2rem; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);">
+       <div style="color: #333; font-size: 1.05rem; line-height: 1.9;">
+        <p style="margin: 0 0 0.75rem 0;">• يدمج المجالات الرئيسية في العلوم الطبيعية والإنسانية</p>
+        <p style="margin: 0 0 0.75rem 0;">• يعزز مهارات التحليل والتفكير العلمي والاستقصاء وحل المشكلات</p>
+        <p style="margin: 0 0 0.75rem 0;">• يحتوي على مواد التقنية الرقمية لتعزيز المهارات العلمية والمهنية</p>
+        <p style="margin: 0 0 0.75rem 0;">• يُطبق في جميع مدارس المملكة لتسهيل انتقال الطلاب</p>
+        <p style="margin: 0 0 0.75rem 0;">• يدعم مهارات وميول للطلاب ويلبي احتياجاتهم التعليمية المختلفة</p>
+        <p style="margin: 0 0 0.75rem 0;">• يتضمن المجال الاختياري لبرنامج مخصص وفق قدرات وميول كل طالب</p>
+        <p style="margin: 0;">• يمكن للطالب دراسة مواد تخصصية من المسارات الأخرى</p>
+       </div>
+      </div><!-- إنفوجرافيك أهداف المسار العام -->
+      <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 2rem 1.5rem; border-radius: 18px; margin: 1.5rem 0; border: 3px solid #42a5f5;">
+       <h4 style="text-align: center; color: #1565c0; font-size: 1.4rem; font-weight: bold; margin: 0 0 1.5rem 0;">🎯 أهداف المسار العام</h4>
+       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+        <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; border-right: 5px solid #7b1fa2;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(66, 165, 245, 0.2)';">
+         <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+          ☪️
+         </div>
+         <p style="font-size: 0.95rem; color: #333; line-height: 1.6; margin: 0; font-weight: 600;">تكوين الشخصية المسلمة المعتزة بدينها وأخلاقها</p>
+        </div>
+        <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; border-right: 5px solid #1976d2;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(66, 165, 245, 0.2)';">
+         <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+          🎓
+         </div>
+         <p style="font-size: 0.95rem; color: #333; line-height: 1.6; margin: 0; font-weight: 600;">اكتساب المهارات الأساسية للحياة الجامعية وسوق العمل</p>
+        </div>
+        <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; border-right: 5px solid #00838f;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(66, 165, 245, 0.2)';">
+         <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+          🎨
+         </div>
+         <p style="font-size: 0.95rem; color: #333; line-height: 1.6; margin: 0; font-weight: 600;">تلبية رغبات الطالب وميوله عبر المجال الاختياري للإبداع والابتكار</p>
+        </div>
+        <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; border-right: 5px solid #e65100;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(66, 165, 245, 0.2)';">
+         <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+          💻
+         </div>
+         <p style="font-size: 0.95rem; color: #333; line-height: 1.6; margin: 0; font-weight: 600;">رفع مستوى الثقافة الرقمية وتعزيز الأمن الفكري والرقمي</p>
+        </div>
+        <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; border-right: 5px solid #2e7d32;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(66, 165, 245, 0.2)';">
+         <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+          📚
+         </div>
+         <p style="font-size: 0.95rem; color: #333; line-height: 1.6; margin: 0; font-weight: 600;">تزويد الطالب بالمهارات الأساسية في العلوم الطبيعية والإنسانية</p>
+        </div>
+       </div>
+      </div><!-- أبرز المخرجات -->
+      <div style="background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);">
+       <div style="text-align: center; margin-bottom: 1.5rem;">
+        <div style="display: inline-block; background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%); color: white; padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 1.2rem; font-weight: bold; box-shadow: 0 4px 12px rgba(102, 187, 106, 0.4);">
+         ✨ أبرز المخرجات
+        </div>
+       </div>
+       <div style="color: #333; font-size: 1.05rem; line-height: 1.9;">
+        • الالتحاق مباشرة ببرامج التعليم العام (دبلوم وبكالوريوس)<br>
+         • خيارات متعددة في التخصصات العلمية والإنسانية والتطبيقية<br>
+         • الالتحاق بوظائف سوق العمل بعد الحصول على شهادات مهنية<br>
+         • التوافق مع متطلبات التنمية المستدامة واحتياجات المستقبل
+       </div>
+      </div>
+     </div><!-- بطاقة مسار علوم الحاسب والهندسة -->
+     <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 2.5rem; border-radius: 25px; margin-bottom: 2rem; border: 4px solid #42a5f5; box-shadow: 0 10px 30px rgba(66, 165, 245, 0.3);">
+      <div style="text-align: center; margin-bottom: 2.5rem;">
+       <div style="font-size: 4.5rem; margin-bottom: 1rem; filter: drop-shadow(0 4px 8px rgba(66, 165, 245, 0.4));">
+        2️⃣
+       </div>
+       <h3 style="color: #1565c0; font-size: 2rem; font-weight: bold; margin: 0;">مسار علوم الحاسب والهندسة</h3>
+      </div><!-- نبذة عن المسار -->
+      <div style="background: white; padding: 2rem; border-radius: 20px; margin-bottom: 2rem; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);">
+       <p style="margin: 0 0 1rem 0;"><strong style="color: #1976d2;">📌 نبذة عن المسار:</strong></p>
+       <div style="color: #333; font-size: 1.05rem; line-height: 1.9;">
+        <p style="margin: 0 0 0.75rem 0;">• مسار مستحدث يسهم في تحقيق رؤية السعودية 2030 من خلال الاستثمار في رأس المال البشري</p>
+        <p style="margin: 0 0 0.75rem 0;"> يحقق المواءمة بين مخرجات التعليم وسوق العمل ويحسن جاهزية الشباب</p>
+        <p style="margin: 0 0 0.75rem 0;">• يزود الطلاب بالمعارف والمهارات الأساسية في علوم الحاسب والعلوم الههدسية والتقنية</p>
+        <p style="margin: 0 0 0.75rem 0;">• يركز على الحلول الرقمية ويتناسب مع احتياجات الطلاب وميولهم وأفكارهم</p>
+        <p style="margin: 0;">• يُسهم في تعزيز قدرات ومواهب الطلاب المختلفة</p>
+       </div>
+      </div><!-- ماذا يقدم المسار -->
+      <div style="background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%); padding: 1.75rem; border-radius: 18px; margin: 1.5rem 0; border: 3px solid #5c6bc0;">
+       <h4 style="text-align: center; color: #283593; font-size: 1.35rem; font-weight: bold; margin: 0 0 1.5rem 0;">💡 ماذا يقدم المسار؟</h4>
+       <div style="background: white; padding: 1.5rem; border-radius: 15px; margin-bottom: 1rem;">
+        <p style="font-size: 1rem; color: #333; line-height: 1.8; margin: 0;">🔹 <strong>مجموعة واسعة من المهارات الرقمية</strong> وأساسيات الهندسة وتطبيقاتها وتقنياتها<br><br>
+          🔹 <strong>تطوير المهارات والميول</strong> التي تضمن التوجه إلى مكاتب اختيارية مثل:<br><span style="display: inline-block; margin: 0.5rem 0.5rem 0.5rem 0; padding: 0.5rem 1rem; background: #e3f2fd; border-radius: 10px; color: #1565c0; font-weight: 600;">🤖 الروبوت الصناعي</span> <span style="display: inline-block; margin: 0.5rem 0.5rem 0.5rem 0; padding: 0.5rem 1rem; background: #e3f2fd; border-radius: 10px; color: #1565c0; font-weight: 600;">🧠 الذكاء الاصطناعي</span> <span style="display: inline-block; margin: 0.5rem 0.5rem 0.5rem 0; padding: 0.5rem 1rem; background: #e3f2fd; border-radius: 10px; color: #1565c0; font-weight: 600;">🔐 الأمن السيبراني</span><br><br>
+          🔹 <strong>مقررات اختيارية من خلال مشاريع تعليمية عملية</strong> تمكن الطالب من اكتساب المهارات والمعارف<br><br>
+          🔹 <strong>القدرة على ابتكار حلول تقنية وهندسية</strong> لمشاكل البيئة الواقعية</p>
+       </div>
+      </div><!-- أهداف مسار الحاسب والهندسة -->
+      <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 2rem 1.5rem; border-radius: 18px; margin: 1.5rem 0; border: 3px solid #42a5f5;">
+       <h4 style="text-align: center; color: #1565c0; font-size: 1.4rem; font-weight: bold; margin: 0 0 1.5rem 0;">🎯 أهداف مسار علوم الحاسب والهندسة</h4>
+       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
+        <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; border-right: 5px solid #1976d2;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(66, 165, 245, 0.2)';">
+         <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+          🎓
+         </div>
+         <p style="font-size: 0.95rem; color: #333; line-height: 1.6; margin: 0; font-weight: 600;">اكتساب المعارف والمهارات التي تؤهل لمواصلة التعليم الجامعي</p>
+        </div>
+        <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; border-right: 5px solid #0288d1;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(66, 165, 245, 0.2)';">
+         <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+          🏠
+         </div>
+         <p style="font-size: 0.95rem; color: #333; line-height: 1.6; margin: 0; font-weight: 600;">استخدام التقنيات الحديثة والعلوم الهندسية في الحياة اليومية</p>
+        </div>
+        <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; border-right: 5px solid #0097a7;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(66, 165, 245, 0.2)';">
+         <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+          📚
+         </div>
+         <p style="font-size: 0.95rem; color: #333; line-height: 1.6; margin: 0; font-weight: 600;">رفع مستوى الثقافة الرقمية والهندسية من خلال مواد متعمقة</p>
+        </div>
+        <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; border-right: 5px solid #00838f;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(66, 165, 245, 0.2)';">
+         <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+          💼
+         </div>
+         <p style="font-size: 0.95rem; color: #333; line-height: 1.6; margin: 0; font-weight: 600;">بناء المهارات اللازمة لسوق العمل من خلال مواد متخصصة</p>
+        </div>
+        <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; border-right: 5px solid #006064;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(66, 165, 245, 0.2)';">
+         <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+          🔗
+         </div>
+         <p style="font-size: 0.95rem; color: #333; line-height: 1.6; margin: 0; font-weight: 600;">تطوير التكامل بين المعارف والتقنية الرقمية لحل المشكلات الواقعية</p>
+        </div>
+        <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; border-right: 5px solid #004d40;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(66, 165, 245, 0.2)';">
+         <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+          🚀
+         </div>
+         <p style="font-size: 0.95rem; color: #333; line-height: 1.6; margin: 0; font-weight: 600;">تحويل الطالب من مستهلك للتقنية إلى مبتكر للحلول الرقمية</p>
+        </div>
+       </div>
+      </div><!-- أبرز المخرجات -->
+      <div style="background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);">
+       <div style="text-align: center; margin-bottom: 1.5rem;">
+        <div style="display: inline-block; background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%); color: white; padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 1.2rem; font-weight: bold; box-shadow: 0 4px 12px rgba(102, 187, 106, 0.4);">
+         ✨ أبرز المخرجات
+        </div>
+       </div>
+       <div style="color: #333; font-size: 1.05rem; line-height: 1.9;">
+        • استكمال الدراسات الأكاديمية في تخصصات علوم الحاسب والهندسة (وظائف المستقبل)<br>
+         • الالتحاق بسوق العمل بشكل مباشر بعد التخرج<br>
+         • الالتحاق ببرامج تخصصية قصيرة بعد المرحلة الثانوية<br>
+         • الحصول على وظائف تتناسب مع المهارات المكتسبة في المرحلة الثانوية
+       </div>
+      </div>
+     </div><!-- بطاقة مسار الصحة والحياة -->
+     <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 2.5rem; border-radius: 25px; margin-bottom: 2rem; border: 4px solid #66bb6a; box-shadow: 0 10px 30px rgba(102, 187, 106, 0.3);">
+      <div style="text-align: center; margin-bottom: 2.5rem;">
+       <div style="font-size: 4.5rem; margin-bottom: 1rem; filter: drop-shadow(0 4px 8px rgba(102, 187, 106, 0.4));">
+        3️⃣
+       </div>
+       <h3 style="color: #2e7d32; font-size: 2rem; font-weight: bold; margin: 0;">مسار الصصة والحياة</h3>
+      </div><!-- نبذة عن المسار -->
+      <div style="background: white; padding: 2rem; border-radius: 20px; margin-bottom: 2rem; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);">
+       <p style="margin: 0 0 1rem 0;"><strong style="color: #1976d2;">📌 نبذة عن المسار:</strong></p>
+       <div style="color: #333; font-size: 1.05rem; line-height: 1.9;">
+        <p style="margin: 0 0 0.75rem 0;">• يوفر تعليماً ثانوياً متنوعاً وصحياً يحقق الجودة الشاملة والمنافسة العالمية</p>
+        <p style="margin: 0 0 0.75rem 0;">• يهيئ الطااب لسوق العمل في مهن المستقبل الصحية</p>
+        <p style="margin: 0 0 0.75rem 0;">• يكسب الطلاب قيماً ليصبحوا مواطنين صالحين ومدركين لواجباتهم اتجاه الأسرة والمجتمع والوطن</p>
+        <p style="margin: 0 0 0.75rem 0;"> يعزز ممارسة نمط إييابي للحياة الصحية من خلال العادات الرياضية والغذائية</p>
+        <p style="margin: 0;">• يساهم في مواجهة الأمراض المزمنة والوراثية والمعدية</p>
+       </div>
+      </div><!-- ماذا يقدم المسار -->
+      <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 1.75rem; border-radius: 18px; margin: 1.5rem 0; border: 3px solid #66bb6a;">
+       <h4 style="text-align: center; color: #2e7d32; font-size: 1.35rem; font-weight: bold; margin: 0 0 1.5rem 0;">💡 ماذا يقدم المسار؟</h4>
+       <div style="background: white; padding: 1.5rem; border-radius: 15px; margin-bottom: 1rem;">
+        <p style="font-size: 1rem; color: #333; line-height: 1.8; margin: 0;">🔹 <strong>مواد تعليمية داعمة</strong> في المجالات الصحية والرياضية والبيئية<br><br>
+          🔹 <strong>تخصصات علمية ومهارية</strong> تزود الطلاب بالعادات والمهارات الوقائية<br><br>
+          🔹 <strong>أنشطة تعليمية متنوعة</strong> تعزز التحصيل العلمي والمهاري<br><br>
+          🔹 <strong>مهارات عملية في المختبرات</strong> الصحية والبيئية<br><br>
+          🔹 <strong>برامج تعليمية عملية</strong> تلبي ميول واحتياجات ومواهب الطلاب المختلفة<br><br>
+          🔹 <strong>فرص ممتدة نحو رؤية 2030</strong> لبناء مجتمع صحي حيوي وواقٍ</p>
+       </div>
+      </div><!-- أهداف مسار الصحة والحياة -->
+      <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 2rem 1.5rem; border-radius: 18px; margin: 1.5rem 0; border: 3px solid #42a5f5;">
+       <h4 style="text-align: center; color: #1565c0; font-size: 1.4rem; font-weight: bold; margin: 0 0 1.5rem 0;">🎯 أهداف مسار الصحة والحياة</h4>
+       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
+        <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; border-right: 5px solid #66bb6a;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(66, 165, 245, 0.2)';">
+         <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+          🇸🇦
+         </div>
+         <p style="font-size: 0.95rem; color: #333; line-height: 1.6; margin: 0; font-weight: 600;">تحقيق رؤية 2030 في تطوير الممارسات الصحية ورفع جودة الحياة</p>
+        </div>
+        <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; border-right: 5px solid #42a5f5;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(66, 165, 245, 0.2)';">
+         <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+          💪
+         </div>
+         <p style="font-size: 0.95rem; color: #333; line-height: 1.6; margin: 0; font-weight: 600;">اكتساب المعارف التي تعزز الصحة العامة والنفسية واللياقة البدنية</p>
+        </div>
+        <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; border-right: 5px solid #29b6f6;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(66, 165, 245, 0.2)';">
+         <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+          🔬
+         </div>
+         <p style="font-size: 0.95rem; color: #333; line-height: 1.6; margin: 0; font-weight: 600;">تزويد الطلاب بالمهارات العملية في المختبرات الصحية والبيئية</p>
+        </div>
+        <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; border-right: 5px solid #26c6da;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(66, 165, 245, 0.2)';">
+         <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+          🏥
+         </div>
+         <p style="font-size: 0.95rem; color: #333; line-height: 1.6; margin: 0; font-weight: 600;">إعداد الطلاب للالتحاق بالتخصصات الصحية والوظائف في الرعاية الصحية</p>
+        </div>
+        <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; border-right: 5px solid #26a69a;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(66, 165, 245, 0.2)';">
+         <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+          🥗
+         </div>
+         <p style="font-size: 0.95rem; color: #333; line-height: 1.6; margin: 0; font-weight: 600;">تعزيز الانضباط الصحي والتغذية السليمة والوقاية من الأمراض</p>
+        </div>
+        <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; border-right: 5px solid #66bb6a;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(66, 165, 245, 0.2)';">
+         <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+          🛡️
+         </div>
+         <p style="font-size: 0.95rem; color: #333; line-height: 1.6; margin: 0; font-weight: 600;">الوعي بأهمية الممارسات الوقائية ومواجهة الأمراض والإصابات</p>
+        </div>
+       </div>
+      </div><!-- أبرز المخرجات -->
+      <div style="background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);">
+       <div style="text-align: center; margin-bottom: 1.5rem;">
+        <div style="display: inline-block; background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%); color: white; padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 1.2rem; font-weight: bold; box-shadow: 0 4px 12px rgba(102, 187, 106, 0.4);">
+         ✨ أبرز المخرجات
+        </div>
+       </div>
+       <div style="color: #333; font-size: 1.05rem; line-height: 1.9;">
+        • الالتحاق بالتخصصات الصحية المستقبلية (طب، تمريض، صيدلة، علوم طبية)<br>
+         • العمل في مختلف مجالات الرعاية الصحية<br>
+         • اكتساب عادات صحية إيجابية تدوم مدى الحياة<br>
+         • المساهمة في بناء مجتمع صحي حيوي ضمن رؤية 2030
+       </div>
+      </div>
+     </div><!-- بطاقة مسار إدارة الأعمال -->
+     <div style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); padding: 2.5rem; border-radius: 25px; margin-bottom: 2rem; border: 4px solid #ff9800; box-shadow: 0 10px 30px rgba(255, 152, 0, 0.3);">
+      <div style="text-align: center; margin-bottom: 2.5rem;">
+       <div style="font-size: 4.5rem; margin-bottom: 1rem; filter: drop-shadow(0 4px 8px rgba(255, 152, 0, 0.4));">
+        4️⃣
+       </div>
+       <h3 style="color: #e65100; font-size: 2rem; font-weight: bold; margin: 0;">مسار إدارة الأعمال</h3>
+      </div><!-- نبذة عن المسار -->
+      <div style="background: white; padding: 2rem; border-radius: 20px; margin-bottom: 2rem; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);">
+       <p style="margin: 0 0 1rem 0;"><strong style="color: #1976d2;">📌 نبذة عن المسار:</strong></p>
+       <div style="color: #333; font-size: 1.05rem; line-height: 1.9;">
+        <p style="margin: 0 0 0.75rem 0;">• يهدف إلى إكساب الطلاب المهارات اللازمة للتعامل مع التحديات الإدارية والمالية</p>
+        <p style="margin: 0 0 0.75rem 0;">• يركز على عنصر الاقتصاد الرقمي والاستثمار في رأس المال البشري</p>
+        <p style="margin: 0 0 0.75rem 0;">• يدعم تحقيق رؤية السعودية 2030 وينسجم مع مستهدفاتها في جودة الحياة</p>
+        <p style="margin: 0 0 0.75rem 0;">• يوسع الفرص التعليمية ويهيئ الطلاب لمواصلة الدراسة الجامعية</p>
+        <p style="margin: 0;">• يسد حاجة سوق العمل من الكوادر المهيأة للعمل في وظائف المستقبل</p>
+       </div>
+      </div><!-- ماذا يقدم المسار -->
+      <div style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); padding: 1.75rem; border-radius: 18px; margin: 1.5rem 0; border: 3px solid #ff9800;">
+       <h4 style="text-align: center; color: #e65100; font-size: 1.35rem; font-weight: bold; margin: 0 0 1.5rem 0;">💡 ماذا يقدم المسار؟</h4>
+       <div style="background: white; padding: 1.5rem; border-radius: 15px; margin-bottom: 1rem;">
+        <p style="font-size: 1rem; color: #333; line-height: 1.8; margin: 0;">🔹 <strong>مهارات تخصصية في المجالات الإدارية المتقدمة:</strong><br><span style="display: inline-block; margin: 0.5rem 0.5rem 0.5rem 0; padding: 0.5rem 1rem; background: #fff3e0; border-radius: 10px; color: #e65100; font-weight: 600;">💰 المحاسبة</span> <span style="display: inline-block; margin: 0.5rem 0.5rem 0.5rem 0; padding: 0.5rem 1rem; background: #fff3e0; border-radius: 10px; color: #e65100; font-weight: 600;">👥 إدارة الموارد البشرية</span> <span style="display: inline-block; margin: 0.5rem 0.5rem 0.5rem 0; padding: 0.5rem 1rem; background: #fff3e0; border-radius: 10px; color: #e65100; font-weight: 600;">📊 المفاهيم الاقتصادية</span> <span style="display: inline-block; margin: 0.5rem 0.5rem 0.5rem 0; padding: 0.5rem 1rem; background: #fff3e0; border-radius: 10px; color: #e65100; font-weight: 600;">ريادة الأعمال</span> <span style="display: inline-block; margin: 0.5rem 0.5rem 0.5rem 0; padding: 0.5rem 1rem; background: #fff3e0; border-radius: 10px; color: #e65100; font-weight: 600;">💳 الإدارة المالية الشخصية</span><br><br>
+          🔹 <strong>مهارات حياتية ومهنية متقدمة:</strong> صناعة القرار، حل المشكلات، الاتصال، حسن التصرف، إدارة الوقت<br><br>
+          🔹 <strong>مهارات الإدارة المالية:</strong> للشخصية والأحداث والاستثمار<br><br>
+          🔹 <strong>مهارات التطبيق:</strong> في أشكال نماذج الأعمال المختلفة<br><br>
+          🔹 <strong>أنشطة تعليمية داعمة:</strong> تلبي احتياجات الطلاب التحصيلية وميولهم المختلفة</p>
+       </div>
+      </div><!-- أهداف مسار إدارة الأعمال -->
+      <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 2rem 1.5rem; border-radius: 18px; margin: 1.5rem 0; border: 3px solid #42a5f5;">
+       <h4 style="text-align: center; color: #1565c0; font-size: 1.4rem; font-weight: bold; margin: 0 0 1.5rem 0;">🎯 أهداف مسار إدارة الأعمال</h4>
+       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
+        <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; border-right: 5px solid #ff9800;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(66, 165, 245, 0.2)';">
+         <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+          🇸🇦
+         </div>
+         <p style="font-size: 0.95rem; color: #333; line-height: 1.6; margin: 0; font-weight: 600;">إعداد طالب ممكّن ومنافس قادر على المساهمة في تحقيق رؤية 2030</p>
+        </div>
+        <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; border-right: 5px solid #42a5f5;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(66, 165, 245, 0.2)';">
+         <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+          ✨
+         </div>
+         <p style="font-size: 0.95rem; color: #333; line-height: 1.6; margin: 0; font-weight: 600;">تنمية جيل قادر على تطبيق القيم الأخلاقية والسلوكيات الإيجابية في بيئة الأعمال</p>
+        </div>
+        <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; border-right: 5px solid #29b6f6;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(66, 165, 245, 0.2)';">
+         <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+          🌍
+         </div>
+         <p style="font-size: 0.95rem; color: #333; line-height: 1.6; margin: 0; font-weight: 600;">تزويد الطالب بالمعرفة والمهارات للتعامل مع المتغيرات الاقتصادية العالمية</p>
+        </div>
+        <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; border-right: 5px solid #26c6da;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(66, 165, 245, 0.2)';">
+         <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+          💰
+         </div>
+         <p style="font-size: 0.95rem; color: #333; line-height: 1.6; margin: 0; font-weight: 600;">تعزيز الثقافة المالية وثقافة الادخار والاستثمار والإدارة المالية الشخصية</p>
+        </div>
+        <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; border-right: 5px solid #26a69a;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(66, 165, 245, 0.2)';">
+         <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+          🎓
+         </div>
+         <p style="font-size: 0.95rem; color: #333; line-height: 1.6; margin: 0; font-weight: 600;">تهئة الطالب للالتحاق ببرامج التدريب العملي أو إكمال الدراسات الجامعية</p>
+        </div>
+        <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; border-right: 5px solid #66bb6a;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(66, 165, 245, 0.2)';">
+         <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+          🚀
+         </div>
+         <p style="font-size: 0.95rem; color: #333; line-height: 1.6; margin: 0; font-weight: 600;">تنمية مهارات الابتكار وريادة الأعمال وتعزيز القدرة على المنافسة المهنية</p>
+        </div>
+       </div>
+      </div><!-- أبرز المخرجات -->
+      <div style="background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);">
+       <div style="text-align: center; margin-bottom: 1.5rem;">
+        <div style="display: inline-block; background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%); color: white; padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 1.2rem; font-weight: bold; box-shadow: 0 4px 12px rgba(102, 187, 106, 0.4);">
+         ✨ أبرز المخرجات
+        </div>
+       </div>
+       <div style="color: #333; font-size: 1.05rem; line-height: 1.9;">
+        • الالتحاق بتخصصات إدارة الأعمال، المحاسبة، الاقتصاد، التسويق، والموارد البشرية<br>
+         • القدرة على إطلاق مشاريع ريادية ناجحة<br>
+         • مهارات متقدمة في الإدارة المالية والاقتصادية<br>
+         • الجاهزية للمنافسة في سوق العمل الرقمي الحديث
+       </div>
+      </div>
+     </div><!-- بطاقة المسار الشرعي -->
+     <div style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); padding: 2.5rem; border-radius: 25px; margin-bottom: 2rem; border: 4px solid #ba68c8; box-shadow: 0 10px 30px rgba(186, 104, 200, 0.3);">
+      <div style="text-align: center; margin-bottom: 2.5rem;">
+       <div style="font-size: 4.5rem; margin-bottom: 1rem; filter: drop-shadow(0 4px 8px rgba(186, 104, 200, 0.4));">
+        5️⃣
+       </div>
+       <h3 style="color: #6a1b9a; font-size: 2rem; font-weight: bold; margin: 0;">المسار الشرعي</h3>
+      </div><!-- نبذة عن المسار -->
+      <div style="background: white; padding: 2rem; border-radius: 20px; margin-bottom: 2rem; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);">
+       <p style="margin: 0 0 1rem 0;"><strong style="color: #1976d2;">📌 نبذة عن المسار:</strong></p>
+       <div style="color: #333; font-size: 1.05rem; line-height: 1.9;">
+        <p style="margin: 0 0 0.75rem 0;">• يمثل أحد المسارات التخصصية لما يحمله من عمق ديني واجتماعي ووطني</p>
+        <p style="margin: 0 0 0.75rem 0;">• يؤصل مكانة الشريعة الإسلامية في حياة المجتمع كركن أساسي</p>
+        <p style="margin: 0 0 0.75rem 0;">• يعزز قيم العدالة والشفافية من خلال التأصيل الشرعي والقانوني</p>
+        <p style="margin: 0 0 0.75rem 0;">• يعزز التكامل الاجتماعي من خلال بيان الأنظمة والتشريعات (الزكاة، الصدقة، الوقف)</p>
+        <p style="margin: 0 0 0.75rem 0;">• يعزز القيم الإسلامية المعتدلة ويحسن فرص الحصول على العمل</p>
+        <p style="margin: 0 0 0.75rem 0;">• يربط المفاهيم الشرعية مع الالتزامات الصحية والأسريةو المتطلبات الوطنية</p>
+        <p style="margin: 0;">• يدرس مقررات المسار في الحياة التطبيقية المجتمعية داخل المدرسة وخارجها</p>
+       </div>
+      </div><!-- ماذا يقدم المسار -->
+      <div style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); padding: 1.75rem; border-radius: 18px; margin: 1.5rem 0; border: 3px solid #ba68c8;">
+       <h4 style="text-align: center; color: #6a1b9a; font-size: 1.35rem; font-weight: bold; margin: 0 0 1.5rem 0;">💡 ماذا يقدم المسار؟</h4>
+       <div style="background: white; padding: 1.5rem; border-radius: 15px; margin-bottom: 1rem;">
+        <p style="font-size: 1rem; color: #333; line-height: 1.8; margin: 0;">🔹 <strong>المفاهيم الشرعية المرتبطة بالحياة:</strong><br><span style="display: inline-block; margin: 0.5rem 0.5rem 0.5rem 0; padding: 0.5rem 1rem; background: #f3e5f5; border-radius: 10px; color: #6a1b9a; font-weight: 600;">⚕️ الالتزامات الصحية</span> <span style="display: inline-block; margin: 0.5rem 0.5rem 0.5rem 0; padding: 0.5rem 1rem; background: #f3e5f5; border-radius: 10px; color: #6a1b9a; font-weight: 600;">👨‍👨‍👩‍👧 الالتزامات الأسرية</span> <span style="display: inline-block; margin: 0.5rem 0.5rem 0.5rem 0; padding: 0.5rem 1rem; background: #f3e5f5; border-radius: 10px; color: #6a1b9a; font-weight: 600;">⚖️ الأنظمة القضائية</span> <span style="display: inline-block; margin: 0.5rem 0.5rem 0.5rem 0; padding: 0.5rem 1rem; background: #f3e5f5; border-radius: 10px; color: #6a1b9a; font-weight: 600;">💻 التشريعات الرقمية</span><br><br>
+          🔹 <strong>المعرفة الشرعية والقانونية:</strong> فهم الأنظمة واللوائح الشرعية والقانونية في المملكة<br><br>
+          🔹 <strong>مقررات ومشاريع استقصاء:</strong> تربط التشريعات والأنظمة والحقوق بتحسين جودة الحياة<br><br>
+          🔹 <strong>التطبيق العملي:</strong> دراسة المقررات في الحياة التطبيقية المجتمعية داخل المدرسة وخارجها<br><br>
+          🔹 <strong>تلبية الميول المختلفة:</strong> تعزيز القدرات والمهارات التحصيلية والمهارية المتنوعة<br><br>
+          🔹 <strong>الجاهزية لسوق العمل:</strong> إبراز جاهزية الطالب لدخول سوق العمل بدافعية عالية</p>
+       </div>
+      </div><!-- أهداف المسار الشرعي -->
+      <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 2rem 1.5rem; border-radius: 18px; margin: 1.5rem 0; border: 3px solid #42a5f5;">
+       <h4 style="text-align: center; color: #1565c0; font-size: 1.4rem; font-weight: bold; margin: 0 0 1.5rem 0;">🎯 أهداف المسار الشرعي</h4>
+       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;">
+        <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; border-right: 5px solid #ba68c8;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(66, 165, 245, 0.2)';">
+         <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+          🇸🇦
+         </div>
+         <p style="font-size: 0.95rem; color: #333; line-height: 1.6; margin: 0; font-weight: 600;">تحقيق أهداف رؤية 2030 في تعزيز الهوية الوطنية والقيم الإسلامية</p>
+        </div>
+        <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; border-right: 5px solid #7b1fa2;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(66, 165, 245, 0.2)';">
+         <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+          📿
+         </div>
+         <p style="font-size: 0.95rem; color: #333; line-height: 1.6; margin: 0; font-weight: 600;">تعميق الفهم الشرعي وربطه بالواقع المعاصر والحياة اليومية</p>
+        </div>
+        <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; border-right: 5px solid #6a1b9a;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(66, 165, 245, 0.2)';">
+         <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+          ⚖️
+         </div>
+         <p style="font-size: 0.95rem; color: #333; line-height: 1.6; margin: 0; font-weight: 600;">فهم الأنظمة الشرعية والقانونية وتطبيقاتها في المملكة</p>
+        </div>
+        <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; border-right: 5px solid #8e24aa;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(66, 165, 245, 0.2)';">
+         <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+          🤝
+         </div>
+         <p style="font-size: 0.95rem; color: #333; line-height: 1.6; margin: 0; font-weight: 600;">تعزيز التكامل الاجتماعي والمسؤولية المجتمعية</p>
+        </div>
+        <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; border-right: 5px solid #9c27b0;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(66, 165, 245, 0.2)';">
+         <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+          🎓
+         </div>
+         <p style="font-size: 0.95rem; color: #333; line-height: 1.6; margin: 0; font-weight: 600;">إعداد الطالب للتخصصات الشرعية والقانونية في الجامعات</p>
+        </div>
+        <div style="background: white; padding: 1.25rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; border-right: 5px solid #ab47bc;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 20px rgba(66, 165, 245, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(66, 165, 245, 0.2)';">
+         <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">
+          💼
+         </div>
+         <p style="font-size: 0.95rem; color: #333; line-height: 1.6; margin: 0; font-weight: 600;">تأهيل الطلاب للعمل في المجالات الشرعية والقضائية والإفتاء</p>
+        </div>
+       </div>
+      </div><!-- أبرز المخرجات -->
+      <div style="background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);">
+       <div style="text-align: center; margin-bottom: 1.5rem;">
+        <div style="display: inline-block; background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%); color: white; padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 1.2rem; font-weight: bold; box-shadow: 0 4px 12px rgba(102, 187, 106, 0.4);">
+         ✨ أبرز المخرجات
+        </div>
+       </div>
+       <div style="color: #333; font-size: 1.05rem; line-height: 1.9;">
+        • الالتحاق بتخصصات الشريعةو القانون، الأنظمة، الدراسات الإسلامية، والدعوة<br>
+         • العمل في المجالات القضائية والإفتاء والدعوة والإرشاد<br>
+         • العمل في مجالات الأوقاف والزكاة والعمل الخيري<br>
+         • المساهمة في تعزيز القيم الإسلامية المعتدلة في المجتمع<br>
+         • العمل في المجالات اللغوية والإعلام الشرعي
+       </div>
+      </div>
+     </div>
+    </section><!-- المجال الاختياري -->
+    <section class="section-card">
+     <h2 class="section-title"><span>🎨</span> <span id="optionalFieldTitle">المجال الاختياري</span></h2>
+     <div style="background: linear-gradient(135deg, #fff9e6 0%, #fff3cc 100%); padding: 1.75rem; border-radius: 15px; margin-bottom: 1.5rem; border: 3px solid #ffc107;">
+      <p style="margin: 0; color: #333; font-size: 1rem; line-height: 1.9; text-align: justify;">عبارة عن <strong style="color: #f57c00;">سلسلة من موضوعات وأنشطة تطيقية</strong> تُعزز المهارات الوظيفية والأكاديمية، ينفرد في تقديمها <strong style="color: #f57c00;">المسار العام</strong> كخطوة متكاملة. يُترك للطالب <strong style="color: #f57c00;">حرية الاختيار</strong> من مسارات المجال الاختياري التي تتناسب مع ميوله وقدراته.</p>
+     </div>
+     <div style="background: white; padding: 1.75rem; border-radius: 15px; margin-bottom: 1.5rem; border: 2px solid #42a5f5;">
+      <h4 style="color: #1565c0; font-size: 1.25rem; font-weight: bold; margin: 0 0 1.25rem 0; text-align: center;">🎯 أهداف المجال الاختياري</h4>
+      <div style="display: grid; gap: 1rem;">
+       <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 1rem; border-radius: 12px; border-right: 4px solid #42a5f5;">
+        <p style="margin: 0; color: #333; font-size: 0.95rem; line-height: 1.7;">🎓 <strong>تلبية احتياجات الطلاب المتنوعة</strong> و تعزيز ميولهم واتجاهاتهم نحو التخصصات المختلفة</p>
+       </div>
+       <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 1rem; border-radius: 12px; border-right: 4px solid #29b6f6;">
+        <p style="margin: 0; color: #333; font-size: 0.95rem; line-height: 1.7;">💼 <strong>إكساب الطلاب مهارات وظيفية</strong> تؤهلهم للالتحاق بسوق العمل</p>
+       </div>
+       <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 1rem; border-radius: 12px; border-right: 4px solid #4fc3f7;">
+        <p style="margin: 0; color: #333; font-size: 0.95rem; line-height: 1.7;">📚  <strong>تعميق المعرفة الأكاديمية</strong> في المجالات التي يفضلها الطالب</p>
+       </div>
+       <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 1rem; border-radius: 12px; border-right: 4px solid #26c6da;">
+        <p style="margin: 0; color: #333; font-size: 0.95rem; line-height: 1.7;">🚀 <strong>تطوير المهارات الحياتية</strong> والتطبيقية من خلال الممارسة العملية</p>
+       </div>
+       <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 1rem; border-radius: 12px; border-right: 5px solid #26a69a;">
+        <p style="margin: 0; color: #333; font-size: 0.95rem; line-height: 1.7;">🌟 <strong>بناء شخصية الطالب المتكاملة</strong> ورفع مستوى الثقة بالنفس</p>
+       </div>
+      </div>
+     </div>
+     <div style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); padding: 1.75rem; border-radius: 15px; margin-bottom: 1.5rem; border: 3px solid #ba68c8;">
+      <h4 style="color: #6a1b9a; font-size: 1.25rem; font-weight: bold; margin: 0 0 1.25rem 0; text-align: center;">🌿 فروع المجال الاختياري</h4>
+      <div style="display: grid; gap: 1.25rem;">
+       <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+         <div style="background: linear-gradient(135deg, #ba68c8 0%, #9c27b0 100%); color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.3rem; flex-shrink: 0;">
+          1
+         </div>
+         <h5 style="color: #7b1fa2; font-size: 1.15rem; font-weight: bold; margin: 0;">المجالات الامتدادية (الممتدة)</h5>
+        </div>
+        <p style="color: #555; font-size: 0.95rem; line-height: 1.7; margin: 0 0 1rem 0;">مجالات إثرائية تهدف إلى <strong>إثراء الطالب معرفياً</strong> من خلال مواد إثرائية ومواد تعلّم ممتدة تعمق فهمه للمجالات الأكاديمية.</p>
+        <div style="background: #f3e5f5; padding: 1rem; border-radius: 10px;">
+         <p style="margin: 0; color: #333; font-size: 0.9rem; line-height: 1.6;"><strong style="color: #7b1fa2;">أمثلة:</strong> الرياضيات المتقدمة • الفيزياء النظرية • علوم الأحياء المتقدمة • الكيمياء التطبيقية • الأدب والنقد • التاريخ المعمق</p>
+        </div>
+       </div>
+       <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+         <div style="background: linear-gradient(135deg, #42a5f5 0%, #1e88e5 100%); color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.3rem; flex-shrink: 0;">
+          2
+         </div>
+         <h5 style="color: #1565c0; font-size: 1.15rem; font-weight: bold; margin: 0;">المجالات التطويرية</h5>
+        </div>
+        <p style="color: #555; font-size: 0.95rem; line-height: 1.7; margin: 0 0 1rem 0;">مجالات مهارية تطبيقية تُنمّي مهارات <strong>التخصصات الحياتية والعملية</strong> التي يحتاجها الطالب في حياته اليومية ومستقبله المهني.</p>
+        <div style="background: #e3f2fd; padding: 1rem; border-radius: 10px;">
+         <p style="margin: 0; color: #333; font-size: 0.9rem; line-height: 1.6;"><strong style="color: #1565c0;">أمثلة:</strong> مهارات التواصل • القيادة والعمل الجماعي • إدارة الوقت • التفكير الناقد • حل المشكلات • الذكاء العاطفي • مهارات العرض والتقديم</p>
+        </div>
+       </div>
+       <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+         <div style="background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%); color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.3rem; flex-shrink: 0;">
+          3
+         </div>
+         <h5 style="color: #e65100; font-size: 1.15rem; font-weight: bold; margin: 0;">المجالات المهنية</h5>
+        </div>
+        <p style="color: #555; font-size: 0.95rem; line-height: 1.7; margin: 0 0 1rem 0;">مجالات ذات تطبيقات عملية تعتمد على <strong>الممارسة الحقيقية والتدريب العملي</strong> وتربط الطالب بشكل مباشر بمتطلبات سوق العمل.</p>
+        <div style="background: #fff3e0; padding: 1rem; border-radius: 10px;">
+         <p style="margin: 0; color: #333; font-size: 0.9rem; line-height: 1.6;"><strong style="color: #e65100;">أمثلة:</strong> التصميم الجرافيكي • البرمجة وتطوير التطبيقات • التصوير الفوتوغرافي • المونتاج والإنتاج • التسويق الإلكتروني • المحاسبة العملية • الضيافة والسياحة</p>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div style="background: white; padding: 1.75rem; border-radius: 15px; margin-bottom: 1.5rem; border: 2px solid #66bb6a;">
+      <h4 style="color: #2e7d32; font-size: 1.25rem; font-weight: bold; margin: 0 0 1.25rem 0; text-align: center;">⚙️ آلية اختيار المجال الاختياري</h4>
+      <div style="display: grid; gap: 1rem;">
+       <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 1rem; border-radius: 12px; border-right: 4px solid #66bb6a;">
+        <p style="margin: 0; color: #333; font-size: 0.95rem; line-height: 1.7;">✅ <strong>حرية الاختيار:</strong> يختار الطالب المجال الذي يتناسب مع ميوله وقدراته واهتماماته المستقبلية</p>
+       </div>
+       <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 1rem; border-radius: 12px; border-right: 4px solid #4caf50;">
+        <p style="margin: 0; color: #333; font-size: 0.95rem; line-height: 1.7;">✅ <strong>التوجيه والإرشاد:</strong> يحصل الطالب على توجيه من المرشد الأكاديمي لاختيار المجال الأنسب</p>
+       </div>
+       <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 1rem; border-radius: 12px; border-right: 4px solid #43a047;">
+        <p style="margin: 0; color: #333; font-size: 0.95rem; line-height: 1.7;">✅ <strong>المرونة:</strong> يمكن للطالب تغيير المجال الاختياري وفق ضوابط محددة إذا وجد أن المجال لا يناسبه</p>
+       </div>
+       <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 1rem; border-radius: 12px; border-right: 4px solid #388e3c;">
+        <p style="margin: 0; color: #333; font-size: 0.95rem; line-height: 1.7;">✅ <strong>التنوع:</strong> تتوفر خيارات متعددة تلبي مختلف الاهتمامات والميول</p>
+       </div>
+      </div>
+     </div>
+    </section><!-- بطاقة مشروع التخرج -->
+    <section class="section-card">
+     <h2 class="section-title"><span>🎓</span> <span>مشروع التخرج</span></h2><!-- البطاقة الأولى: تعريف مشروع التخرج -->
+     <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 2rem; border-radius: 20px; margin-bottom: 2rem; border: 3px solid #66bb6a; box-shadow: 0 8px 20px rgba(102, 187, 106, 0.25);">
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+       <div style="font-size: 3.5rem; margin-bottom: 1rem; filter: drop-shadow(0 4px 8px rgba(102, 187, 106, 0.3));">
+        📋
+       </div>
+       <h3 style="color: #2e7d32; font-size: 1.6rem; font-weight: bold; margin: 0 0 0.5rem 0;">ما هو مشروع التخرج؟</h3>
+      </div>
+      <p style="font-size: 1.1rem; color: #333; line-height: 2; margin: 0; text-align: justify; padding: 0 1rem;">يعد مشروع التخرج بمثابة <strong style="color: #2e7d32;">مقرر دراسي</strong> يتعين على الطالب اجتيازه في <strong style="color: #2e7d32;">الفصل الأخير من السنة الثالثة</strong> في الثانوية العامة، وهو <strong style="color: #2e7d32;">مهمة أدائية</strong> تُنجز بمشاركة مجموعة من الطلاب، يتراوح عددهم من <strong style="color: #2e7d32;">2 إلى 4 طلاب</strong>، أو بشكل <strong style="color: #2e7d32;">فردي</strong> (في حالات استثنائية، و بموافقة معتمدة).</p>
+     </div><!-- البطاقة الثانية: أهداف مشروع التخرج -->
+     <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 2rem; border-radius: 20px; margin-bottom: 2rem; border: 3px solid #42a5f5; box-shadow: 0 8px 20px rgba(66, 165, 245, 0.25);">
+      <div style="text-align: center; margin-bottom: 2rem;">
+       <div style="font-size: 3.5rem; margin-bottom: 1rem; filter: drop-shadow(0 4px 8px rgba(66, 165, 245, 0.3));">
+        🎯
+       </div>
+       <h3 style="color: #1565c0; font-size: 1.6rem; font-weight: bold; margin: 0;">أهداف مشروع التخرج</h3>
+      </div>
+      <div style="display: grid; gap: 1.25rem;"><!-- الهدف 1 -->
+       <div style="background: white; padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); border-right: 5px solid #42a5f5; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateX(-5px)'; this.style.boxShadow='0 6px 20px rgba(66, 165, 245, 0.3)'" onmouseout="this.style.transform='translateX(0)'; this.style.boxShadow='0 4px 12px rgba(0, 0, 0, 0.1)'">
+        <div style="display: flex; align-items: flex-start; gap: 1rem;">
+         <div style="font-size: 2rem; flex-shrink: 0;">
+          📚
+         </div>
+         <p style="margin: 0; color: #333; font-size: 1rem; line-height: 1.8;"><strong style="color: #1565c0;">توظيف معارف الطالب وقدراته البحثية</strong> من خلال إعطاء الفرصة لممارسة المفاهيم العلمية والنظريات والمهارات التطبيقية</p>
+        </div>
+       </div><!-- الهدف 2 -->
+       <div style="background: white; padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); border-right: 5px solid #29b6f6; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateX(-5px)'; this.style.boxShadow='0 6px 20px rgba(41, 182, 246, 0.3)'" onmouseout="this.style.transform='translateX(0)'; this.style.boxShadow='0 4px 12px rgba(0, 0, 0, 0.1)'">
+        <div style="display: flex; align-items: flex-start; gap: 1rem;">
+         <div style="font-size: 2rem; flex-shrink: 0;">
+          🔬
+         </div>
+         <p style="margin: 0; color: #333; font-size: 1rem; line-height: 1.8;"><strong style="color: #0277bd;">تطبيق ما تعلمه الطالب</strong> في موضوعات المجال الاختياري أو في مجالات المسار التخصصي الذي التحق فيه</p>
+        </div>
+       </div><!-- الهدف 3 -->
+       <div style="background: white; padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); border-right: 5px solid #4fc3f7; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateX(-5px)'; this.style.boxShadow='0 6px 20px rgba(79, 195, 247, 0.3)'" onmouseout="this.style.transform='translateX(0)'; this.style.boxShadow='0 4px 12px rgba(0, 0, 0, 0.1)'">
+        <div style="display: flex; align-items: flex-start; gap: 1rem;">
+         <div style="font-size: 2rem; flex-shrink: 0;">
+          🧠
+         </div>
+         <p style="margin: 0; color: #333; font-size: 1rem; line-height: 1.8;"><strong style="color: #0288d1;">تنمية قدرات الطالب البحثية</strong> من فهمها، مهارات البحث العلمي، ومهارات العمل ضمن الفريق</p>
+        </div>
+       </div><!-- الهدف 4 -->
+       <div style="background: white; padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); border-right: 5px solid #26c6da; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateX(-5px)'; this.style.boxShadow='0 6px 20px rgba(38, 198, 218, 0.3)'" onmouseout="this.style.transform='translateX(0)'; this.style.boxShadow='0 4px 12px rgba(0, 0, 0, 0.1)'">
+        <div style="display: flex; align-items: flex-start; gap: 1rem;">
+         <div style="font-size: 2rem; flex-shrink: 0;">
+          💬
+         </div>
+         <p style="margin: 0; color: #333; font-size: 1rem; line-height: 1.8;"><strong style="color: #0097a7;">تنمية مهارات الاتصال</strong> والعرض والإقناع والقيادة، وتنظيم الوقت</p>
+        </div>
+       </div><!-- الهدف 5 -->
+       <div style="background: white; padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); border-right: 5px solid #26a69a; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateX(-5px)'; this.style.boxShadow='0 6px 20px rgba(38, 166, 154, 0.3)'" onmouseout="this.style.transform='translateX(0)'; this.style.boxShadow='0 4px 12px rgba(0, 0, 0, 0.1)'">
+        <div style="display: flex; align-items: flex-start; gap: 1rem;">
+         <div style="font-size: 2rem; flex-shrink: 0;">
+          🚀
+         </div>
+         <p style="margin: 0; color: #333; font-size: 1rem; line-height: 1.8;"><strong style="color: #00838f;">نقل الطالب تدريجيًا</strong> من بيئة الدراسة، وتهيئته لبيئة العمل أو المرحلة الجامعية</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- مجالات مشروع التخرج -->
+    <section class="section-card">
+     <h2 class="section-title"><span>🧭</span> <span>مجالات مشروع التخرج وفق المسارات التخصصية</span></h2><!-- المسار العام -->
+     <div style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); padding: 2rem; border-radius: 20px; margin-bottom: 2rem; border: 3px solid #ba68c8; box-shadow: 0 8px 20px rgba(186, 104, 200, 0.25);">
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+       <div style="font-size: 3rem; margin-bottom: 0.75rem;">
+        📚
+       </div>
+       <h3 style="color: #6a1b9a; font-size: 1.5rem; font-weight: bold; margin: 0;">المسار العام</h3>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center;"><span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #6a1b9a; box-shadow: 0 3px 10px rgba(186, 104, 200, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(186, 104, 200, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(186, 104, 200, 0.2)'">🌾 الزراعة والغابات</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #6a1b9a; box-shadow: 0 3px 10px rgba(186, 104, 200, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(186, 104, 200, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(186, 104, 200, 0.2)'">🐟 مزارع الأسماك</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #6a1b9a; box-shadow: 0 3px 10px rgba(186, 104, 200, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(186, 104, 200, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(186, 104, 200, 0.2)'">📋 الدعم المكتبي</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #6a1b9a; box-shadow: 0 3px 10px rgba(186, 104, 200, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(186, 104, 200, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(186, 104, 200, 0.2)'">🔨 الحرف والبناء</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #6a1b9a; box-shadow: 0 3px 10px rgba(186, 104, 200, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(186, 104, 200, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(186, 104, 200, 0.2)'">⚙️ المصانع والآلات</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #6a1b9a; box-shadow: 0 3px 10px rgba(186, 104, 200, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(186, 104, 200, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(186, 104, 200, 0.2)'">🛠️ المهن الأولية</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #6a1b9a; box-shadow: 0 3px 10px rgba(186, 104, 200, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(186, 104, 200, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(186, 104, 200, 0.2)'">🛍️ الخدمات والمبيعات</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #6a1b9a; box-shadow: 0 3px 10px rgba(186, 104, 200, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(186, 104, 200, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(186, 104, 200, 0.2)'">🏢 العقارات</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #6a1b9a; box-shadow: 0 3px 10px rgba(186, 104, 200, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(186, 104, 200, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(186, 104, 200, 0.2)'">🏗️ البناء</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #6a1b9a; box-shadow: 0 3px 10px rgba(186, 104, 200, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(186, 104, 200, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(186, 104, 200, 0.2)'">📱 الإعلام الجديد</span>
+      </div>
+     </div><!-- علوم الحاسب والهندسة -->
+     <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 2rem; border-radius: 20px; margin-bottom: 2rem; border: 3px solid #42a5f5; box-shadow: 0 8px 20px rgba(66, 165, 245, 0.25);">
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+       <div style="font-size: 3rem; margin-bottom: 0.75rem;">
+        💻
+       </div>
+       <h3 style="color: #1565c0; font-size: 1.5rem; font-weight: bold; margin: 0;">علوم الحاسب والهندسة</h3>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center;"><span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #1565c0; box-shadow: 0 3px 10px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(66, 165, 245, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(66, 165, 245, 0.2)'">⚛️ النانو تكنول��جي</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #1565c0; box-shadow: 0 3px 10px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(66, 165, 245, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(66, 165, 245, 0.2)'">🤖 الذكاء الاصطناعي</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #1565c0; box-shadow: 0 3px 10px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(66, 165, 245, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(66, 165, 245, 0.2)'">🎮 علم السلوك والتحكم</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #1565c0; box-shadow: 0 3px 10px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(66, 165, 245, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(66, 165, 245, 0.2)'">🌐 إنترنت الأشياء</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #1565c0; box-shadow: 0 3px 10px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(66, 165, 245, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(66, 165, 245, 0.2)'">🔐 الأمن السيبراني</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #1565c0; box-shadow: 0 3px 10px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(66, 165, 245, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(66, 165, 245, 0.2)'">🎯 تصميم الألعاب الإلكترونية</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #1565c0; box-shadow: 0 3px 10px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(66, 165, 245, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(66, 165, 245, 0.2)'">🦾 هندسة الروبوتات</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #1565c0; box-shadow: 0 3px 10px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(66, 165, 245, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(66, 165, 245, 0.2)'">📷 التصوير الفوتوغرافي و��لرقمي</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #1565c0; box-shadow: 0 3px 10px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(66, 165, 245, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(66, 165, 245, 0.2)'">🎬 الرسوم المتحركة ثلاثية الأبعاد</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #1565c0; box-shadow: 0 3px 10px rgba(66, 165, 245, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(66, 165, 245, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(66, 165, 245, 0.2)'">🥽 الواقع المعزز والافتراضي</span>
+      </div>
+     </div><!-- الصحة والحياة -->
+     <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 2rem; border-radius: 20px; margin-bottom: 2rem; border: 3px solid #66bb6a; box-shadow: 0 8px 20px rgba(102, 187, 106, 0.25);">
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+       <div style="font-size: 3rem; margin-bottom: 0.75rem;">
+        🏥
+       </div>
+       <h3 style="color: #2e7d32; font-size: 1.5rem; font-weight: bold; margin: 0;">الصحة والحياة</h3>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center;"><span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #2e7d32; box-shadow: 0 3px 10px rgba(102, 187, 106, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(102, 187, 106, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(102, 187, 106, 0.2)'">🩺 الرعاية الصحية</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #2e7d32; box-shadow: 0 3px 10px rgba(102, 187, 106, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(102, 187, 106, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(102, 187, 106, 0.2)'">🔬 العلوم الطبية</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #2e7d32; box-shadow: 0 3px 10px rgba(102, 187, 106, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(102, 187, 106, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(102, 187, 106, 0.2)'">👨‍⚕️ المساعد الصحي</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #2e7d32; box-shadow: 0 3px 10px rgba(102, 187, 106, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(102, 187, 106, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(102, 187, 106, 0.2)'">🛡️ طرق الوقاية</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #2e7d32; box-shadow: 0 3px 10px rgba(102, 187, 106, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(102, 187, 106, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(102, 187, 106, 0.2)'">❤️ ال��حة العامة</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #2e7d32; box-shadow: 0 3px 10px rgba(102, 187, 106, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(102, 187, 106, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(102, 187, 106, 0.2)'">🚑 الإسعافات الأولية</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #2e7d32; box-shadow: 0 3px 10px rgba(102, 187, 106, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(102, 187, 106, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(102, 187, 106, 0.2)'">🍎 الأطعمة وصحة البيئة</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #2e7d32; box-shadow: 0 3px 10px rgba(102, 187, 106, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(102, 187, 106, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(102, 187, 106, 0.2)'">🥗 التغذية</span>
+      </div>
+     </div><!-- إدارة الأعمال -->
+     <div style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); padding: 2rem; border-radius: 20px; margin-bottom: 2rem; border: 3px solid #ff9800; box-shadow: 0 8px 20px rgba(255, 152, 0, 0.25);">
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+       <div style="font-size: 3rem; margin-bottom: 0.75rem;">
+        💼
+       </div>
+       <h3 style="color: #e65100; font-size: 1.5rem; font-weight: bold; margin: 0;">إدارة الأعمال</h3>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center;"><span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #e65100; box-shadow: 0 3px 10px rgba(255, 152, 0, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(255, 152, 0, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(255, 152, 0, 0.2)'">📱 التسويق الإلكتروني</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #e65100; box-shadow: 0 3px 10px rgba(255, 152, 0, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(255, 152, 0, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(255, 152, 0, 0.2)'">📊 بحوث التسويق</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #e65100; box-shadow: 0 3px 10px rgba(255, 152, 0, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(255, 152, 0, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(255, 152, 0, 0.2)'">🎨 تصميم المنتجات</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #e65100; box-shadow: 0 3px 10px rgba(255, 152, 0, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(255, 152, 0, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(255, 152, 0, 0.2)'">🚀 ريادة الأعمال</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #e65100; box-shadow: 0 3px 10px rgba(255, 152, 0, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(255, 152, 0, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(255, 152, 0, 0.2)'">💡 ��لمشاريع الناشئة</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #e65100; box-shadow: 0 3px 10px rgba(255, 152, 0, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(255, 152, 0, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(255, 152, 0, 0.2)'">🛒 التجارة الإلكترونية</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #e65100; box-shadow: 0 3px 10px rgba(255, 152, 0, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(255, 152, 0, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(255, 152, 0, 0.2)'">��� سلاسل الإمداد والخدمات اللوجستية</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #e65100; box-shadow: 0 3px 10px rgba(255, 152, 0, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(255, 152, 0, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(255, 152, 0, 0.2)'">🏪 الأسواق التجارية</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #e65100; box-shadow: 0 3px 10px rgba(255, 152, 0, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(255, 152, 0, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(255, 152, 0, 0.2)'">💼 الأفكار والمشروعات الريادية</span>
+      </div>
+     </div><!-- الشرعي -->
+     <div style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); padding: 2rem; border-radius: 20px; margin-bottom: 2rem; border: 3px solid #ba68c8; box-shadow: 0 8px 20px rgba(186, 104, 200, 0.25);">
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+       <div style="font-size: 3rem; margin-bottom: 0.75rem;">
+        📿
+       </div>
+       <h3 style="color: #6a1b9a; font-size: 1.5rem; font-weight: bold; margin: 0;">الشرعي</h3>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center;"><span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #6a1b9a; box-shadow: 0 3px 10px rgba(186, 104, 200, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(186, 104, 200, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(186, 104, 200, 0.2)'">💰 فقه المعاملات المالية</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #6a1b9a; box-shadow: 0 3px 10px rgba(186, 104, 200, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(186, 104, 200, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(186, 104, 200, 0.2)'">💻 القيم والمواطنة الرقمية</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #6a1b9a; box-shadow: 0 3px 10px rgba(186, 104, 200, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(186, 104, 200, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(186, 104, 200, 0.2)'">🕌 الوقف والوصايا</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #6a1b9a; box-shadow: 0 3px 10px rgba(186, 104, 200, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(186, 104, 200, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(186, 104, 200, 0.2)'">🤝 المعاملات</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #6a1b9a; box-shadow: 0 3px 10px rgba(186, 104, 200, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(186, 104, 200, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(186, 104, 200, 0.2)'">📖 علوم القرآن ومصطلح الحديث</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #6a1b9a; box-shadow: 0 3px 10px rgba(186, 104, 200, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(186, 104, 200, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(186, 104, 200, 0.2)'">⚖️ القانون</span> <span style="background: white; padding: 0.75rem 1.25rem; border-radius: 25px; font-size: 0.95rem; font-weight: 600; color: #6a1b9a; box-shadow: 0 3px 10px rgba(186, 104, 200, 0.2); transition: all 0.3s ease; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;" onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 5px 15px rgba(186, 104, 200, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(186, 104, 200, 0.2)'">👥 العلوم الاجتماعية</span>
+      </div>
+     </div>
+    </section><!-- ضوابط اختيار وتنفيذ مشروع التخرج -->
+    <section class="section-card">
+     <h2 class="section-title"><span>⚙️</span> <span>ضوابط اختيار وتنفيذ مشروع التخرج</span></h2>
+     <div style="display: grid; gap: 1.25rem;"><!-- الضابط 1 -->
+      <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 1.75rem; border-radius: 18px; border-right: 5px solid #42a5f5; box-shadow: 0 4px 15px rgba(66, 165, 245, 0.2); transition: all 0.4s ease; cursor: pointer;" onmouseover="this.style.transform='translateX(-8px)'; this.style.boxShadow='0 8px 25px rgba(66, 165, 245, 0.35)'" onmouseout="this.style.transform='translateX(0)'; this.style.boxShadow='0 4px 15px rgba(66, 165, 245, 0.2)'">
+       <div style="display: flex; align-items: flex-start; gap: 1rem;">
+        <div style="background: linear-gradient(135deg, #42a5f5 0%, #1e88e5 100%); color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; box-shadow: 0 4px 12px rgba(66, 165, 245, 0.4);">
+         ✓
+        </div>
+        <p style="margin: 0; color: #1565c0; font-size: 1.05rem; line-height: 1.9; font-weight: 600;">تكون فكرة مشروع التخرج <strong style="color: #0d47a1;">ضمن المجالات المخصصة</strong> سواء في المسار العام أو المسارات التخصصية</p>
+       </div>
+      </div><!-- الضابط 2 -->
+      <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 1.75rem; border-radius: 18px; border-right: 5px solid #66bb6a; box-shadow: 0 4px 15px rgba(102, 187, 106, 0.2); transition: all 0.4s ease; cursor: pointer;" onmouseover="this.style.transform='translateX(-8px)'; this.style.boxShadow='0 8px 25px rgba(102, 187, 106, 0.35)'" onmouseout="this.style.transform='translateX(0)'; this.style.boxShadow='0 4px 15px rgba(102, 187, 106, 0.2)'">
+       <div style="display: flex; align-items: flex-start; gap: 1rem;">
+        <div style="background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%); color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; box-shadow: 0 4px 12px rgba(102, 187, 106, 0.4);">
+         ✓
+        </div>
+        <p style="margin: 0; color: #2e7d32; font-size: 1.05rem; line-height: 1.9; font-weight: 600;">يقدم مشروع التخرج <strong style="color: #1b5e20;">أحد الحلول المناسبة</strong> لإحدى المشكلات الواقعية القابلة للعلاج</p>
+       </div>
+      </div><!-- الضابط 3 -->
+      <div style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); padding: 1.75rem; border-radius: 18px; border-right: 5px solid #ba68c8; box-shadow: 0 4px 15px rgba(186, 104, 200, 0.2); transition: all 0.4s ease; cursor: pointer;" onmouseover="this.style.transform='translateX(-8px)'; this.style.boxShadow='0 8px 25px rgba(186, 104, 200, 0.35)'" onmouseout="this.style.transform='translateX(0)'; this.style.boxShadow='0 4px 15px rgba(186, 104, 200, 0.2)'">
+       <div style="display: flex; align-items: flex-start; gap: 1rem;">
+        <div style="background: linear-gradient(135deg, #ba68c8 0%, #9c27b0 100%); color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; box-shadow: 0 4px 12px rgba(186, 104, 200, 0.4);">
+         ✓
+        </div>
+        <p style="margin: 0; color: #6a1b9a; font-size: 1.05rem; line-height: 1.9; font-weight: 600;">يتسق مشروع التخرج مع <strong style="color: #4a148c;">أحكام الشريعة الإسلامية</strong> وأنظمة الدولة والقيم الإسلامية</p>
+       </div>
+      </div><!-- الضابط 4 -->
+      <div style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); padding: 1.75rem; border-radius: 18px; border-right: 5px solid #ff9800; box-shadow: 0 4px 15px rgba(255, 152, 0, 0.2); transition: all 0.4s ease; cursor: pointer;" onmouseover="this.style.transform='translateX(-8px)'; this.style.boxShadow='0 8px 25px rgba(255, 152, 0, 0.35)'" onmouseout="this.style.transform='translateX(0)'; this.style.boxShadow='0 4px 15px rgba(255, 152, 0, 0.2)'">
+       <div style="display: flex; align-items: flex-start; gap: 1rem;">
+        <div style="background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%); color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; box-shadow: 0 4px 12px rgba(255, 152, 0, 0.4);">
+         ✓
+        </div>
+        <p style="margin: 0; color: #e65100; font-size: 1.05rem; line-height: 1.9; font-weight: 600;">تكون فكرة المشروع <strong style="color: #bf360c;">أصيلة غير مكررة</strong>، إلا في حال تطويرها وتغيير مخرجاتها</p>
+       </div>
+      </div><!-- الضابط 5 -->
+      <div style="background: linear-gradient(135deg, #e1f5fe 0%, #b3e5fc 100%); padding: 1.75rem; border-radius: 18px; border-right: 5px solid #29b6f6; box-shadow: 0 4px 15px rgba(41, 182, 246, 0.2); transition: all 0.4s ease; cursor: pointer;" onmouseover="this.style.transform='translateX(-8px)'; this.style.boxShadow='0 8px 25px rgba(41, 182, 246, 0.35)'" onmouseout="this.style.transform='translateX(0)'; this.style.boxShadow='0 4px 15px rgba(41, 182, 246, 0.2)'">
+       <div style="display: flex; align-items: flex-start; gap: 1rem;">
+        <div style="background: linear-gradient(135deg, #29b6f6 0%, #0277bd 100%); color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; box-shadow: 0 4px 12px rgba(41, 182, 246, 0.4);">
+         ✓
+        </div>
+        <p style="margin: 0; color: #0277bd; font-size: 1.05rem; line-height: 1.9; font-weight: 600;">يحترم المشروع <strong style="color: #01579b;">الملكية الفكرية</strong> ويتجنب الانتحال العلمي أو السرقة العلمية</p>
+       </div>
+      </div><!-- الضابط 6 -->
+      <div style="background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%); padding: 1.75rem; border-radius: 18px; border-right: 5px solid #ec407a; box-shadow: 0 4px 15px rgba(236, 64, 122, 0.2); transition: all 0.4s ease; cursor: pointer;" onmouseover="this.style.transform='translateX(-8px)'; this.style.boxShadow='0 8px 25px rgba(236, 64, 122, 0.35)'" onmouseout="this.style.transform='translateX(0)'; this.style.boxShadow='0 4px 15px rgba(236, 64, 122, 0.2)'">
+       <div style="display: flex; align-items: flex-start; gap: 1rem;">
+        <div style="background: linear-gradient(135deg, #ec407a 0%, #d81b60 100%); color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; box-shadow: 0 4px 12px rgba(236, 64, 122, 0.4);">
+         ✓
+        </div>
+        <p style="margin: 0; color: #c2185b; font-size: 1.05rem; line-height: 1.9; font-weight: 600;">الالتزام <strong style="color: #880e4f;">بالخطة الزمنية للمشروع</strong> والعمل على مراجعته وفق المراحل المحددة</p>
+       </div>
+      </div><!-- الضابط 7 -->
+      <div style="background: linear-gradient(135deg, #fff9e6 0%, #fff3cc 100%); padding: 1.75rem; border-radius: 18px; border-right: 5px solid #ffc107; box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2); transition: all 0.4s ease; cursor: pointer;" onmouseover="this.style.transform='translateX(-8px)'; this.style.boxShadow='0 8px 25px rgba(255, 193, 7, 0.35)'" onmouseout="this.style.transform='translateX(0)'; this.style.boxShadow='0 4px 15px rgba(255, 193, 7, 0.2)'">
+       <div style="display: flex; align-items: flex-start; gap: 1rem;">
+        <div style="background: linear-gradient(135deg, #ffc107 0%, #ffa000 100%); color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);">
+         ✓
+        </div>
+        <p style="margin: 0; color: #f57c00; font-size: 1.05rem; line-height: 1.9; font-weight: 600;">المشروع <strong style="color: #e65100;">ملك لوزارة التعليم</strong> ويُراعى مستوى الطالب للمشاركة في المعارض والفعاليات</p>
+       </div>
+      </div>
+     </div><!-- رسالة ختامية -->
+     <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 2rem; border-radius: 20px; margin-top: 2rem; border: 4px dashed #66bb6a; text-align: center; box-shadow: 0 6px 20px rgba(102, 187, 106, 0.25);">
+      <div style="font-size: 3rem; margin-bottom: 1rem; animation: pulse 2s ease-in-out infinite;">
+       ⚖️
+      </div>
+      <p style="margin: 0; color: #2e7d32; font-size: 1.25rem; font-weight: 700; line-height: 1.9;">الالتزام بهذه الضوابط يضمن<br><strong style="font-size: 1.35rem; color: #1b5e20;">نجاح مشروع التخرج وتحقيق أهدافه</strong></p>
+     </div>
+    </section><!-- مراحل تنفيذ مشروع التخرج -->
+    <section class="section-card">
+     <h2 class="section-title"><span>🔄</span> <span>مراحل تنفيذ مشروع التخرج</span></h2><!-- المرحلة 1: التخطيط -->
+     <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 2.5rem; border-radius: 25px; margin-bottom: 2rem; border: 4px solid #42a5f5; box-shadow: 0 10px 30px rgba(66, 165, 245, 0.3); position: relative; overflow: hidden;">
+      <div style="position: absolute; top: 20px; right: 20px; background: linear-gradient(135deg, #42a5f5 0%, #1e88e5 100%); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 2rem; box-shadow: 0 6px 20px rgba(66, 165, 245, 0.5); z-index: 1;">
+       1
+      </div>
+      <div style="text-align: center; margin-bottom: 2rem;">
+       <div style="font-size: 4rem; margin-bottom: 1rem; filter: drop-shadow(0 4px 8px rgba(66, 165, 245, 0.4));">
+        📋
+       </div>
+       <h3 style="color: #1565c0; font-size: 2rem; font-weight: bold; margin: 0;">مرحلة التخطيط</h3>
+      </div>
+      <div style="display: grid; gap: 1.25rem;">
+       <div style="background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 6px 20px rgba(66, 165, 245, 0.2); border: 2px solid #90caf9;">
+        <div style="display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 1.5rem;">
+         <div style="background: linear-gradient(135deg, #42a5f5 0%, #1e88e5 100%); color: white; width: 55px; height: 55px; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 2rem; flex-shrink: 0; box-shadow: 0 4px 15px rgba(66, 165, 245, 0.4);">
+          📌
+         </div>
+         <h4 style="color: #1565c0; font-size: 1.3rem; font-weight: bold; margin: 0.5rem 0 0 0; line-height: 1.4;">مهام مرحلة التخطيط</h4>
+        </div>
+        <div style="color: #333; font-size: 1.05rem; line-height: 2; padding-right: 1rem;">
+         • اختيار مشرف المشاريع وتوزيعهم<br>
+          • تنظيم عملية توزيع الطلاب على المشاريع<br>
+          • مراجعة خطة المشروع وكتابة نموذج خطة عمل<br>
+          • مناقشة فكرة المشروع واقتراح التعديلات<br>
+          • الإعلان عن المشاريع المقبولة والمشاريع التي تحتاج إلى تعديل
+        </div>
+       </div>
+      </div>
+     </div><!-- المرحلة 2: التنفيذ -->
+     <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 2.5rem; border-radius: 25px; margin-bottom: 2rem; border: 4px solid #66bb6a; box-shadow: 0 10px 30px rgba(102, 187, 106, 0.3); position: relative; overflow: hidden;">
+      <div style="position: absolute; top: 20px; right: 20px; background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 2rem; box-shadow: 0 6px 20px rgba(102, 187, 106, 0.5); z-index: 1;">
+       2
+      </div>
+      <div style="text-align: center; margin-bottom: 2rem;">
+       <div style="font-size: 4rem; margin-bottom: 1rem; filter: drop-shadow(0 4px 8px rgba(102, 187, 106, 0.4));">
+        🔧
+       </div>
+       <h3 style="color: #2e7d32; font-size: 2rem; font-weight: bold; margin: 0;">مرحلة التنفيذ</h3>
+      </div>
+      <div style="display: grid; gap: 1.25rem;">
+       <div style="background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 6px 20px rgba(102, 187, 106, 0.2); border: 2px solid #81c784;">
+        <div style="display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 1.5rem;">
+         <div style="background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%); color: white; width: 55px; height: 55px; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 2rem; flex-shrink: 0; box-shadow: 0 4px 15px rgba(102, 187, 106, 0.4);">
+          🔧
+         </div>
+         <h4 style="color: #2e7d32; font-size: 1.3rem; font-weight: bold; margin: 0.5rem 0 0 0; line-height: 1.4;">مهام مرحلة التنفيذ</h4>
+        </div>
+        <div style="color: #333; font-size: 1.05rem; line-height: 2; padding-right: 1rem;">
+         • مساعدة الطلاب على فهم مشكلة المشروع<br>
+          • تحديد الأهداف وكتابة وثيقة المشروع<br>
+          • تدريب الطلاب على كتابة التقارير وإعداد العروض<br>
+          • توفير متطلبات المشروع<br>
+           تنظيم لقاء أسبوعي لمتابعة المشاريع<br>
+           معالجة المعوقات والصعوبات<br>
+          • إعداد تقرير لكل مرحلة من المشروع<br>
+          • متابعة تنفيذ المشروع وفق الخطة<br>
+          • تقييم الطلاب أثناء التنفيذ
+        </div>
+       </div>
+      </div>
+     </div><!-- المرحلة 3: التقييم -->
+     <div style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); padding: 2.5rem; border-radius: 25px; margin-bottom: 0; border: 4px solid #ff9800; box-shadow: 0 10px 30px rgba(255, 152, 0, 0.3); position: relative; overflow: hidden;">
+      <div style="position: absolute; top: 20px; right: 20px; background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 2rem; box-shadow: 0 6px 20px rgba(255, 152, 0, 0.5); z-index: 1;">
+       3
+      </div>
+      <div style="text-align: center; margin-bottom: 2rem;">
+       <div style="font-size: 4rem; margin-bottom: 1rem; filter: drop-shadow(0 4px 8px rgba(255, 152, 0, 0.4));">
+        ⭐
+       </div>
+       <h3 style="color: #e65100; font-size: 2rem; font-weight: bold; margin: 0;">مرحلة التقييم</h3>
+      </div>
+      <div style="display: grid; gap: 1.25rem;">
+       <div style="background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 6px 20px rgba(255, 152, 0, 0.2); border: 2px solid #ffb74d;">
+        <div style="display: flex; align-items: flex-start; gap: 1.5rem; margin-bottom: 1.5rem;">
+         <div style="background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%); color: white; width: 55px; height: 55px; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 2rem; flex-shrink: 0; box-shadow: 0 4px 15px rgba(255, 152, 0, 0.4);">
+          ⭐
+         </div>
+         <h4 style="color: #e65100; font-size: 1.3rem; font-weight: bold; margin: 0.5rem 0 0 0; line-height: 1.4;">مهام مرحلة التقييم</h4>
+        </div>
+        <div style="color: #333; font-size: 1.05rem; line-height: 2; padding-right: 1rem;">
+         • تسليم التقرير النهائي في الأوقات المحددة<br>
+          • تقديم عرض نهائي لمناقشة المشروع<br>
+          • مناقشة لجنة المشروع للطلاب وتقويم العمل<br>
+          • رصد الدرجات وفق المعايير المحددة<br>
+          • تسليم النسخة النهائية بعد تصحيحها
+        </div>
+       </div>
+      </div><!-- رسالة ختامية -->
+      <div style="background: white; padding: 2rem; border-radius: 20px; margin-top: 2rem; border: 3px solid #66bb6a; text-align: center; box-shadow: 0 6px 20px rgba(102, 187, 106, 0.25);">
+       <div style="font-size: 3rem; margin-bottom: 1rem;">
+        🎯
+       </div>
+       <p style="margin: 0; color: #2e7d32; font-size: 1.25rem; font-weight: 700; line-height: 1.9;">اتباع هذه المراحل بدقة يضمن<br><strong style="font-size: 1.35rem; color: #1b5e20;">إنجاز مشروع تخرج متميز ومتكامل</strong></p>
+      </div>
+     </div>
+    </section><!-- ضوابط التقييم / التأجيل -->
+    <section class="section-card">
+     <h2 class="section-title"><span>📋</span> <span>ضوابط التقييم / التأجيل</span></h2>
+     <div style="display: grid; gap: 1.5rem;"><!-- الضابط 1: التقييم المستمر -->
+      <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 2rem; border-radius: 20px; border: 3px solid #42a5f5; box-shadow: 0 6px 20px rgba(66, 165, 245, 0.25); transition: all 0.4s ease; cursor: pointer; position: relative; overflow: hidden;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 30px rgba(66, 165, 245, 0.35)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(66, 165, 245, 0.25)'">
+       <div style="position: absolute; top: -20px; left: -20px; width: 100px; height: 100px; background: rgba(255, 255, 255, 0.1); border-radius: 50%; transition: all 0.5s ease;"></div>
+       <div style="display: flex; align-items: center; gap: 1.5rem; position: relative; z-index: 1;">
+        <div style="background: linear-gradient(135deg, #42a5f5 0%, #1e88e5 100%); color: white; width: 70px; height: 70px; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; flex-shrink: 0; box-shadow: 0 6px 20px rgba(66, 165, 245, 0.4); transform: rotate(-5deg); transition: transform 0.3s ease;" onmouseover="this.style.transform='rotate(0deg) scale(1.1)'" onmouseout="this.style.transform='rotate(-5deg) scale(1)'">
+         📊
+        </div>
+        <div style="flex: 1;">
+         <p style="margin: 0; color: #1565c0; font-size: 1.15rem; line-height: 1.9; font-weight: 600;">يعتمد التقييم على <strong style="color: #0d47a1; font-size: 1.2rem;">التقييم المستمر</strong> منذ بدء المشروع وانتهاءه</p>
+        </div>
+       </div>
+      </div><!-- الضابط 2: آلية توزيع الدرجات -->
+      <div style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); padding: 2rem; border-radius: 20px; border: 3px solid #ba68c8; box-shadow: 0 6px 20px rgba(186, 104, 200, 0.25); transition: all 0.4s ease; cursor: pointer; position: relative; overflow: hidden;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 30px rgba(186, 104, 200, 0.35)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(186, 104, 200, 0.25)'">
+       <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: rgba(255, 255, 255, 0.1); border-radius: 50%; transition: all 0.5s ease;"></div>
+       <div style="display: flex; align-items: center; gap: 1.5rem; position: relative; z-index: 1;">
+        <div style="background: linear-gradient(135deg, #ba68c8 0%, #9c27b0 100%); color: white; width: 70px; height: 70px; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; flex-shrink: 0; box-shadow: 0 6px 20px rgba(186, 104, 200, 0.4); transform: rotate(5deg); transition: transform 0.3s ease;" onmouseover="this.style.transform='rotate(0deg) scale(1.1)'" onmouseout="this.style.transform='rotate(5deg) scale(1)'">
+         📚
+        </div>
+        <div style="flex: 1;">
+         <p style="margin: 0; color: #6a1b9a; font-size: 1.15rem; line-height: 1.9; font-weight: 600;">يُعامل المشروع <strong style="color: #4a148c; font-size: 1.2rem;">كأي مقرر دراسي</strong>، وله آلية توزيع درجات</p>
+        </div>
+       </div>
+      </div><!-- الضابط 3: التأجيل -->
+      <div style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); padding: 2rem; border-radius: 20px; border: 3px solid #ff9800; box-shadow: 0 6px 20px rgba(255, 152, 0, 0.25); transition: all 0.4s ease; cursor: pointer; position: relative; overflow: hidden;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 30px rgba(255, 152, 0, 0.35)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(255, 152, 0, 0.25)'">
+       <div style="position: absolute; bottom: -20px; left: -20px; width: 100px; height: 100px; background: rgba(255, 255, 255, 0.1); border-radius: 50%; transition: all 0.5s ease;"></div>
+       <div style="display: flex; align-items: center; gap: 1.5rem; position: relative; z-index: 1;">
+        <div style="background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%); color: white; width: 70px; height: 70px; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; flex-shrink: 0; box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4); transform: rotate(-5deg); transition: transform 0.3s ease;" onmouseover="this.style.transform='rotate(0deg) scale(1.1)'" onmouseout="this.style.transform='rotate(-5deg) scale(1)'">
+         ⏰
+        </div>
+        <div style="flex: 1;">
+         <p style="margin: 0; color: #e65100; font-size: 1.15rem; line-height: 1.9; font-weight: 600;">يُسمح للطالب <strong style="color: #bf360c; font-size: 1.2rem;">بطلب التأجيل</strong> وفق ضوابط محددة</p>
+        </div>
+       </div>
+      </div><!-- الضابط 4: الدرجة النهائية -->
+      <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 2rem; border-radius: 20px; border: 3px solid #66bb6a; box-shadow: 0 6px 20px rgba(102, 187, 106, 0.25); transition: all 0.4s ease; cursor: pointer; position: relative; overflow: hidden;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 30px rgba(102, 187, 106, 0.35)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(102, 187, 106, 0.25)'">
+       <div style="position: absolute; bottom: -20px; right: -20px; width: 100px; height: 100px; background: rgba(255, 255, 255, 0.1); border-radius: 50%; transition: all 0.5s ease;"></div>
+       <div style="display: flex; align-items: center; gap: 1.5rem; position: relative; z-index: 1;">
+        <div style="background: linear-gradient(135deg, #66bb6a 0%, #43a047 100%); color: white; width: 70px; height: 70px; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; flex-shrink: 0; box-shadow: 0 6px 20px rgba(102, 187, 106, 0.4); transform: rotate(5deg); transition: transform 0.3s ease;" onmouseover="this.style.transform='rotate(0deg) scale(1.1)'" onmouseout="this.style.transform='rotate(5deg) scale(1)'">
+         ✅
+        </div>
+        <div style="flex: 1;">
+         <p style="margin: 0; color: #2e7d32; font-size: 1.15rem; line-height: 1.9; font-weight: 600;">لا تُحدد <strong style="color: #1b5e20; font-size: 1.2rem;">الدرجة النهائية</strong> إلا بعد تقديم المشروع بشكل كامل</p>
+        </div>
+       </div>
+      </div>
+     </div><!-- رسالة ختامية محفزة -->
+     <div style="background: linear-gradient(135deg, #ffd54f 0%, #ffeb3b 100%); padding: 2rem; border-radius: 25px; margin-top: 2rem; border: 4px solid #ffc107; text-align: center; box-shadow: 0 8px 25px rgba(255, 193, 7, 0.35); position: relative; overflow: hidden;">
+      <div style="position: absolute; top: 10px; left: 10px; font-size: 4rem; opacity: 0.1; animation: pulse 2s ease-in-out infinite;">
+       🎓
+      </div>
+      <div style="position: absolute; bottom: 10px; right: 10px; font-size: 4rem; opacity: 0.1; animation: pulse 2s ease-in-out infinite 1s;">
+       📊
+      </div>
+      <div style="position: relative; z-index: 1;">
+       <div style="font-size: 3.5rem; margin-bottom: 1rem; animation: bounce 2s ease-in-out infinite;">
+        🌟
+       </div>
+       <p style="margin: 0; color: #f57c00; font-size: 1.3rem; font-weight: 700; line-height: 2;">التقييم العادل والمستمر يحفز الطلاب<br><strong style="font-size: 1.45rem; color: #e65100;">على تقديم أفضل ما لديهم في مشروع التخرج</strong></p>
+      </div>
+     </div>
+    </section>
+   </div>
+  </div>
+  <script>
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a7df22ce151ee69',t:'MTc2NDcxMTI0MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
